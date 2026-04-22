@@ -95,37 +95,7 @@
     .ba-label-before { left: 12px; background: rgba(0,0,0,0.6); color: #fff; backdrop-filter: blur(4px); }
     .ba-label-after { right: 12px; background: rgba(255,255,255,0.9); color: #000; backdrop-filter: blur(4px); }
 
-    /* Fundo gradiente animado */
-    @keyframes gradShift {
-      0%, 100% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-    }
-    .hero-gradient {
-      background: linear-gradient(135deg, #0a0a0a 0%, #1a0a2e 25%, #0a0a0a 50%, #0d1b2a 75%, #0a0a0a 100%);
-      background-size: 400% 400%;
-      animation: gradShift 15s ease infinite;
-    }
-
-    /* Animações de entrada */
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(40px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    .anim-up {
-      opacity: 0;
-      animation: fadeUp 0.8s ease forwards;
-    }
-    .anim-d1 { animation-delay: 0.1s; }
-    .anim-d2 { animation-delay: 0.2s; }
-    .anim-d3 { animation-delay: 0.3s; }
-    .anim-d4 { animation-delay: 0.4s; }
-    .anim-d5 { animation-delay: 0.5s; }
-
-    /* Scrollbar */
-    .portfolio-wrap::-webkit-scrollbar { width: 6px; }
-    .portfolio-wrap::-webkit-scrollbar-track { background: #0a0a0a; }
-    .portfolio-wrap::-webkit-scrollbar-thumb { background: #333; border-radius: 3px; }
-
+    
     /* Efeito Hover nos cartões */
     .project-card, .service-card {
       transition: transform 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease;
@@ -149,44 +119,24 @@
     }
   </style>
  </head>
- <body class="h-full bg-[#0a0a0a]">
+<body class="bg-[#0a0a0a] text-white">
   <div class="portfolio-wrap grain hero-gradient" id="app">
    <!-- HERO -->
-   <header class="relative min-h-[90%] flex items-center justify-center px-6 py-20">
-    <div class="absolute top-20 left-10 w-72 h-72 bg-violet-600 rounded-full opacity-[0.03] blur-3xl"></div>
-    <div class="absolute bottom-20 right-10 w-96 h-96 bg-cyan-500 rounded-full opacity-[0.03] blur-3xl"></div>
-    <div class="max-w-4xl mx-auto text-center relative z-10">
-     <div class="anim-up anim-d1 relative inline-block mb-8">
-      <div class="w-32 h-32 rounded-full bg-gradient-to-br from-violet-500 to-violet-700 overflow-hidden mx-auto flex items-center justify-center shadow-2xl">
-       <img src="https://i.ibb.co/bj5dSnLw/Chat-GPT-Image-21-de-abr-de-2026-13-42-35.png">
-        <svg viewbox="0 0 100 100" class="w-20 h-20" fill="none" xmlns="http://www.w3.org/2000/svg">
-         <circle cx="50" cy="35" r="18" fill="rgba(255,255,255,0.9)" /> <path d="M20 70 Q20 55 50 55 Q80 55 80 70 L80 85 Q80 90 75 90 L25 90 Q20 90 20 85 Z" fill="rgba(255,255,255,0.85)" />
-        </svg>
-      </div>
-     </div>
-     <div class="anim-up anim-d2 mono text-violet-400 text-sm tracking-[4px] uppercase mb-4">
-      Criador de conteúdo com IA
-     </div>
-     <h1 class="anim-up anim-d3 text-5xl md:text-7xl font-900 text-white leading-tight mb-6" id="heroName">Estúdio de IA<br><span class="bg-gradient-to-r from-violet-400 to-cyan-400 bg-clip-text text-transparent">Criativa</span></h1>
-     <p class="anim-up anim-d4 text-lg md:text-xl text-gray-400 max-w-2xl mx-auto mb-12 leading-relaxed" id="heroTagline">Transformando ideias em realidade visual com o poder da Inteligência Artificial. Cada projeto é uma obra única.</p>
-     <div class="anim-up anim-d5 flex flex-wrap justify-center gap-3">
-      <a href="#portfolio" class="bg-violet-600 hover:bg-violet-500 text-white px-8 py-3 rounded-full font-600 transition-all duration-300 flex items-center gap-2"> <i data-lucide="eye" style="width:18px;height:18px;"></i> Ver Portfólio </a> 
-      <a href="#contact" class="border border-gray-700 hover:border-violet-500 text-gray-300 hover:text-white px-8 py-3 rounded-full font-500 transition-all duration-300 flex items-center gap-2"> <i data-lucide="mail" style="width:18px;height:18px;"></i> Contacto </a>
-     </div>
-    </div>
-   </header>
-   
-   <!-- SOBRE -->
-   <section class="px-6 py-15 relative" id="about">
-    <div class="max-w-5xl mx-auto">
-     <div class="mono text-violet-400 text-xs tracking-[4px] uppercase mb-3">Sobre</div>
-     <h2 class="text-3xl md:text-4xl font-800 text-white mb-8">IA como ferramenta<br><span class="text-gray-500">de transformação visual</span></h2>
-     <p class="text-gray-400 text-lg leading-relaxed max-w-3xl mb-10" id="aboutText">Sou especialista em criar conteúdo visual impactante utilizando as mais avançadas ferramentas de Inteligência Artificial. De restauração de fotografias antigas a criação de cenários impossíveis, cada projeto é cuidadosamente elaborado para superar expectativas e elevar marcas ao próximo nível.</p>
-     <div class="flex flex-wrap gap-2">
-      <span class="tag-pill">Canva</span> <span class="tag-pill">Photoshop</span> <span class="tag-pill">Midjourney</span> <span class="tag-pill">Image FX</span> <span class="tag-pill">ChatGPT</span> <span class="tag-pill">Gemini</span>
-     </div>
-    </div>
-   </section>
+<section class="text-center py-20 px-6">
+  <img src="https://i.ibb.co/bj5dSnLw/Chat-GPT-Image-21-de-abr-de-2026-13-42-35.png" class="w-32 mx-auto rounded-full mb-6">
+
+  <h1 class="text-4xl md:text-6xl font-bold mb-4">
+    Transformo imagens comuns em peças publicitárias que vendem
+  </h1>
+
+  <p class="text-gray-400 max-w-2xl mx-auto mb-8">
+    Criação de imagens profissionais com IA para marcas, produtos e negócios que querem se destacar e aumentar suas vendas
+  </p>
+
+  <a href="#contato" class="bg-violet-600 px-8 py-4 rounded-xl">
+    Quero transformar minhas imagens
+  </a>
+</section>
 
    <!-- PORTFÓLIO - ANTES E DEPOIS -->
    <section class="px-6 py-24" id="portfolio">
@@ -280,155 +230,97 @@
    </section>
 
 
-<!-- Projeto 5 -->
-<div class="project-card rounded-2xl overflow-hidden bg-[#111115] border border-gray-800/50">
+<!-- VÍDEO -->
+<section class="text-center px-6 py-16">
+  <h2 class="text-3xl mb-4">Veja a transformação na prática</h2>
 
-  <div class="flex justify-center py-6 bg-black">
-    
-    <div style="width:80%; position:relative;">
-      
+  <div class="flex justify-center">
+    <div style="width:80%;">
       <div style="padding:56.25% 0 0 0;position:relative;">
         <iframe 
-          id="vimeoPlayer"
           src="https://player.vimeo.com/video/1185645090?autoplay=1&loop=1&muted=1"
+          style="position:absolute;top:0;left:0;width:100%;height:100%;"
           frameborder="0"
-          allow="autoplay; fullscreen; picture-in-picture"
-          style="position:absolute;top:0;left:0;width:100%;height:100%;border-radius:16px;"
+          allow="autoplay; fullscreen"
         ></iframe>
       </div>
-
-      <!-- Botão de som -->
-      <button id="unmuteBtn"
-        style="position:absolute;bottom:20px;right:20px;
-        background:rgba(0,0,0,0.7);
-        color:#fff;
-        padding:10px 14px;
-        border-radius:8px;
-        border:none;
-        cursor:pointer;">
-        🔊 Ativar som
-      </button>
-
     </div>
-
   </div>
 
-</div>
+  <p class="text-gray-400 mt-6 max-w-xl mx-auto">
+    De imagens simples para visuais que chamam atenção, geram desejo e aumentam o valor percebido do seu produto.
+  </p>
+</section>
+ </div>
 
-<script src="https://player.vimeo.com/api/player.js"></script>
+  <!-- BENEFÍCIOS -->
+<section class="px-6 py-16 text-center">
+  <h2 class="text-3xl mb-10">Por que usar IA nas suas imagens?</h2>
 
-<script>
-  const iframe = document.getElementById('vimeoPlayer');
-  const player = new Vimeo.Player(iframe);
-
-  const btn = document.getElementById('unmuteBtn');
-
-  btn.addEventListener('click', async () => {
-    try {
-      await player.setMuted(false);
-      await player.setVolume(1);
-      btn.style.display = "none"; // esconde botão após ativar
-    } catch (e) {
-      console.log("Erro ao ativar som:", e);
-    }
-  });
-</script>
-
-  <!-- Conteúdo -->
-  <div class="p-5">
-    <div class="flex gap-2 mb-3">
+  <div class="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto text-left">
+    <p>✔ Visual profissional sem custo alto</p>
+    <p>✔ Mais valor percebido no produto</p>
+    <p>✔ Aumenta cliques e atenção</p>
+    <p>✔ Ideal para redes sociais e anúncios</p>
   </div>
+</section>
 
-    <h3 class="text-white font-700 text-lg mb-1">
-      Divulgadora de Produtos
-    </h3>
+<!-- CTA -->
+<section class="text-center py-16 px-6">
+  <h2 class="text-3xl mb-4">Quer vender mais com suas imagens?</h2>
 
-    <p class="text-gray-500 text-sm">
-      Modelo de IA: Geramos o modelo e o vídeo de apresentação do seu produto.
-    </p>
-  </div>
+  <p class="text-gray-400 mb-8">
+    O próximo passo é simples:
+  </p>
 
-</div>
+  <a href="#contato" class="bg-violet-600 px-8 py-4 rounded-xl">
+    Quero um orçamento agora
+  </a>
+</section>
 
+<!-- CONTATO -->
+<section id="contato" class="px-6 py-20 max-w-xl mx-auto">
 
-   <!-- SERVIÇOS -->
-   <section class="px-6 py-24" id="services">
-    <div class="max-w-6xl mx-auto">
-     <div class="mono text-violet-400 text-xs tracking-[4px] uppercase mb-3">
-      Serviços
-     </div>
-     <h2 class="text-3xl md:text-4xl font-800 text-white mb-16">O que posso fazer <span class="text-gray-500">por si</span></h2>
-     <div class="grid md:grid-cols-2 gap-6" id="servicesGrid"></div>
-    </div>
-   </section>
+  <h2 class="text-3xl text-center mb-6">
+    Vamos criar algo incrível?
+  </h2>
 
-   <!-- CONTATO -->
+  <p class="text-gray-400 text-center mb-10">
+    Me envie uma mensagem e eu te respondo o mais rápido possível.
+  </p>
 
-   <section class="px-6 py-15" id="contact">
-    <div class="max-w-2xl mx-auto text-center">
-     <div class="mono text-violet-400 text-xs tracking-[4px] uppercase mb-3">Contato</div>
-     <h2 class="text-3xl md:text-4xl font-800 text-white mb-6">Vamos criar algo <span class="bg-gradient-to-r from-violet-400 to-cyan-400 bg-clip-text text-transparent">incrível</span>?</h2>
-     <p class="text-gray-400 mb-10">Entre em contato e vamos transformar as suas ideias em realidade.</p>
-     <form id="contactForm" class="text-left space-y-5">
-     <form action="https://formsubmit.co/simonesanttos25@outlook.com" method="POST">
-	
-	<!-- Campos do formulário -->
-	<div>
-	<label for="cf-name" class="block text-sm text-gray-400 mb-2">Nome</label> 
-  	<input type="text" id="cf-name" class="w-full bg-white/5 border border-gray-800 focus:border-violet-500 rounded-xl px-5 py-3 text-white outline-none transition-colors" placeholder="O seu nome">
-      	</div>
-	<div>
-        <label for="cf-email" class="block text-sm text-gray-400 mb-2">Email</label> 
-        <input type="email" id="email" placeholder="Seu e-mail" required class="w-full bg-white/5 border border-gray-800 focus:border-violet-500 rounded-xl px-5 py-3 text-white outline-none transition-colors" placeholder="oseu@email.com">
-	>
-	  <p id="erroEmail" style="color:red; display:none; font-size:14px;">
-    	  Digite um e-mail válido.
-  	</p>        
-	</div>
-	<div>
-        <label for="cf-msg" class="block text-sm text-gray-400 mb-2">Mensagem</label> 
-        <textarea id="cf-msg" rows="4" class="w-full bg-white/5 border border-gray-800 focus:border-violet-500 rounded-xl px-5 py-3 text-white outline-none transition-colors resize-none" placeholder="Descreva o seu projeto..."></textarea>
-        </div>
-		  
-  <!-- Anti-spam -->
-  <input type="hidden" name="_captcha" value="false">
+  <!-- FORMULÁRIO FUNCIONANDO -->
+  <form action="https://formsubmit.co/simonesanttos25@outlook.com" method="POST" class="space-y-4">
 
-  <!-- Redirecionamento após envio -->
-  <input type="hidden" name="_next" value="https://seusite.com/obrigado.html">
+    <input type="text" name="nome" placeholder="Seu nome" required class="w-full p-4 rounded-lg bg-white/5">
 
-  <!-- Botão -->
-  <button type="submit" class="w-full bg-violet-600 hover:bg-violet-500 text-white py-4 rounded-xl font-600 transition-all duration-300 flex items-center justify-center gap-2"> 
-    <i data-lucide="send" style="width:18px;height:18px;"></i> 
-    Enviar Mensagem 
-  </button>
-</form>
-<script>
-  const form = document.getElementById("formContato");
-  const email = document.getElementById("email");
-  const erro = document.getElementById("erroEmail");
+    <input type="email" name="email" placeholder="Seu e-mail" required class="w-full p-4 rounded-lg bg-white/5">
 
-  form.addEventListener("submit", function(e) {
-    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    <textarea name="mensagem" placeholder="Sua mensagem" required class="w-full p-4 rounded-lg bg-white/5"></textarea>
 
-    if (!regex.test(email.value)) {
-      e.preventDefault(); // impede envio
-      erro.style.display = "block";
-      email.style.border = "2px solid red";
-    } else {
-      erro.style.display = "none";
-      email.style.border = "2px solid green";
-    }
-  });
-</script>
-        
-      <div id="formMsg" class="hidden text-center py-3 rounded-xl text-sm font-500"></div>
-     </form>
-    </div>
-   </section>
+    <!-- CONFIG -->
+    <input type="hidden" name="_captcha" value="false">
+    <input type="hidden" name="_subject" value="Novo contato do site!">
+    <input type="hidden" name="_next" value="https://simoneamigo.github.io/portifolio/obrigado.html">
+
+    <button type="submit" class="w-full bg-violet-600 py-4 rounded-xl">
+      Enviar Mensagem
+    </button>
+
+  </form>
+
+  <!-- FRASE FINAL (ALTA CONVERSÃO) -->
+  <p class="text-gray-500 text-center mt-10">
+    Se você chegou até aqui, já sabe que suas imagens ainda não estão refletindo todo o valor do seu produto. 
+ <p class="text-gray-500 text-center">
+    E eu posso te mostrar exatamente como mudar isso.
+  </p>
+
+</section>
 
    <!-- RODAPÉ -->
    <footer class="px-6 py-12 border-t border-gray-800/50">
-    <div class="max-w-5xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+    <div class="max-w-5xl mx-auto flex flex-col md:flex-row items-center justify-between gap-2">
      <div class="text-gray-600 text-sm">
       © 2026 Estúdio de IA Criativo. Todos os direitos reservados.
      </div>
