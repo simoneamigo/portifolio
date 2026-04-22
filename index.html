@@ -95,7 +95,37 @@
     .ba-label-before { left: 12px; background: rgba(0,0,0,0.6); color: #fff; backdrop-filter: blur(4px); }
     .ba-label-after { right: 12px; background: rgba(255,255,255,0.9); color: #000; backdrop-filter: blur(4px); }
 
-    
+    /* Fundo gradiente animado */
+    @keyframes gradShift {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+    .hero-gradient {
+      background: linear-gradient(135deg, #0a0a0a 0%, #1a0a2e 25%, #0a0a0a 50%, #0d1b2a 75%, #0a0a0a 100%);
+      background-size: 400% 400%;
+      animation: gradShift 15s ease infinite;
+    }
+
+    /* Animações de entrada */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(40px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .anim-up {
+      opacity: 0;
+      animation: fadeUp 0.8s ease forwards;
+    }
+    .anim-d1 { animation-delay: 0.1s; }
+    .anim-d2 { animation-delay: 0.2s; }
+    .anim-d3 { animation-delay: 0.3s; }
+    .anim-d4 { animation-delay: 0.4s; }
+    .anim-d5 { animation-delay: 0.5s; }
+
+    /* Scrollbar */
+    .portfolio-wrap::-webkit-scrollbar { width: 6px; }
+    .portfolio-wrap::-webkit-scrollbar-track { background: #0a0a0a; }
+    .portfolio-wrap::-webkit-scrollbar-thumb { background: #333; border-radius: 3px; }
+
     /* Efeito Hover nos cartões */
     .project-card, .service-card {
       transition: transform 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease;
@@ -119,9 +149,11 @@
     }
   </style>
  </head>
+
 <body class="bg-[#0a0a0a] text-white">
-  <div class="portfolio-wrap grain hero-gradient" id="app">
-   <!-- HERO -->
+<div class="portfolio-wrap grain hero-gradient" id="app">
+
+<!-- HERO -->
 <section class="text-center py-20 px-6">
   <img src="https://i.ibb.co/bj5dSnLw/Chat-GPT-Image-21-de-abr-de-2026-13-42-35.png" class="w-32 mx-auto rounded-full mb-6">
 
@@ -138,7 +170,7 @@
   </a>
 </section>
 
-   <!-- PORTFÓLIO - ANTES E DEPOIS -->
+<!-- PORTFÓLIO - ANTES E DEPOIS -->
    <section class="px-6 py-24" id="portfolio">
     <div class="max-w-6xl mx-auto">
      <div class="mono text-violet-400 text-xs tracking-[4px] uppercase mb-3">Portfólio</div>
@@ -229,7 +261,6 @@
     </div>
    </section>
 
-
 <!-- VÍDEO -->
 <section class="text-center px-6 py-16">
   <h2 class="text-3xl mb-4">Veja a transformação na prática</h2>
@@ -251,9 +282,8 @@
     De imagens simples para visuais que chamam atenção, geram desejo e aumentam o valor percebido do seu produto.
   </p>
 </section>
- </div>
 
-  <!-- BENEFÍCIOS -->
+<!-- BENEFÍCIOS -->
 <section class="px-6 py-16 text-center">
   <h2 class="text-3xl mb-10">Por que usar IA nas suas imagens?</h2>
 
@@ -326,16 +356,14 @@
 
   <!-- FRASE FINAL (ALTA CONVERSÃO) -->
   <p class="text-gray-500 text-center mt-10">
-    Se você chegou até aqui, já sabe que suas imagens ainda não estão refletindo todo o valor do seu produto. 
- <p class="text-gray-500 text-center">
-    E eu posso te mostrar exatamente como mudar isso.
+    Se você chegou até aqui, provavelmente suas imagens podem melhorar — e isso pode estar te fazendo perder vendas.
   </p>
 
 </section>
 
-   <!-- RODAPÉ -->
+<!-- RODAPÉ -->
    <footer class="px-6 py-12 border-t border-gray-800/50">
-    <div class="max-w-5xl mx-auto flex flex-col md:flex-row items-center justify-between gap-2">
+    <div class="max-w-5xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
      <div class="text-gray-600 text-sm">
       © 2026 Estúdio de IA Criativo. Todos os direitos reservados.
      </div>
@@ -420,8 +448,7 @@ function initApp() {
 
 document.addEventListener('DOMContentLoaded', initApp);
 
-// === FORMULÁRIO ===
-   <script>
+// === FORMULÁRIO DE CONTACTO ===
 const form = document.getElementById("formContato");
 const btn = document.getElementById("btnEnviar");
 const texto = document.getElementById("btnTexto");
@@ -466,7 +493,6 @@ form.addEventListener("submit", async function(e) {
   loading.classList.add("hidden");
   btn.disabled = false;
 });
-</script>
   </script>
  </body>
 </html>
