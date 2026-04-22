@@ -1,0 +1,528 @@
+<!doctype html>
+<html lang="pt-PT" class="h-full">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Estúdio de IA Criativa</title>
+  
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&amp;family=Space+Mono:wght@400;700&amp;display=swap" rel="stylesheet">
+  
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body { height: 100%; }
+
+    .portfolio-wrap {
+      font-family: 'Outfit', sans-serif;
+      height: 100%;
+      width: 100%;
+      overflow-y: auto;
+      overflow-x: hidden;
+    }
+
+    .mono { font-family: 'Space Mono', monospace; }
+
+    /* Efeito de ruído (Grain) */
+    .grain::before {
+      content: '';
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    /* Slider Antes/Depois */
+    .ba-container {
+      position: relative;
+      width: 100%;
+      overflow: hidden;
+      border-radius: 16px;
+      cursor: ew-resize; /* Cursor para arrastar */
+      aspect-ratio: 4/3;
+      user-select: none;
+      background: #1a1a2e; /* Fundo enquanto a imagem carrega */
+    }
+    .ba-before, .ba-after {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      object-fit: contain; /* Alterado para 'contain' para mostrar a imagem inteira sem cortes */
+      pointer-events: none; /* Deixa os eventos para o container */
+    }
+    .ba-before { clip-path: inset(0 var(--clip-right, 50%) 0 0); z-index: 2; }
+    
+    .ba-slider-line {
+      position: absolute;
+      top: 0;
+      left: var(--slider-pos, 50%);
+      width: 3px;
+      height: 100%;
+      background: #fff;
+      z-index: 3;
+      transform: translateX(-50%);
+      pointer-events: none;
+      box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    }
+    .ba-slider-handle {
+      position: absolute;
+      top: 50%;
+      left: var(--slider-pos, 50%);
+      transform: translate(-50%, -50%);
+      width: 44px; height: 44px;
+      background: #fff;
+      border-radius: 50%;
+      z-index: 4;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+      pointer-events: none;
+    }
+    .ba-label {
+      position: absolute;
+      top: 12px;
+      padding: 4px 12px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      z-index: 5;
+      pointer-events: none;
+    }
+    .ba-label-before { left: 12px; background: rgba(0,0,0,0.6); color: #fff; backdrop-filter: blur(4px); }
+    .ba-label-after { right: 12px; background: rgba(255,255,255,0.9); color: #000; backdrop-filter: blur(4px); }
+
+    /* Fundo gradiente animado */
+    @keyframes gradShift {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+    .hero-gradient {
+      background: linear-gradient(135deg, #0a0a0a 0%, #1a0a2e 25%, #0a0a0a 50%, #0d1b2a 75%, #0a0a0a 100%);
+      background-size: 400% 400%;
+      animation: gradShift 15s ease infinite;
+    }
+
+    /* Animações de entrada */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(40px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .anim-up {
+      opacity: 0;
+      animation: fadeUp 0.8s ease forwards;
+    }
+    .anim-d1 { animation-delay: 0.1s; }
+    .anim-d2 { animation-delay: 0.2s; }
+    .anim-d3 { animation-delay: 0.3s; }
+    .anim-d4 { animation-delay: 0.4s; }
+    .anim-d5 { animation-delay: 0.5s; }
+
+    /* Scrollbar */
+    .portfolio-wrap::-webkit-scrollbar { width: 6px; }
+    .portfolio-wrap::-webkit-scrollbar-track { background: #0a0a0a; }
+    .portfolio-wrap::-webkit-scrollbar-thumb { background: #333; border-radius: 3px; }
+
+    /* Efeito Hover nos cartões */
+    .project-card, .service-card {
+      transition: transform 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease;
+    }
+    .project-card:hover, .service-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 60px rgba(139,92,246,0.12);
+      border-color: rgba(139,92,246,0.3);
+    }
+
+    /* Estilo das Tags (Pills) */
+    .tag-pill {
+      background: rgba(139,92,246,0.12);
+      border: 1px solid rgba(139,92,246,0.25);
+      color: #c4b5fd;
+      padding: 4px 14px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.5px;
+    }
+  </style>
+ </head>
+ <body class="h-full bg-[#0a0a0a]">
+  <div class="portfolio-wrap grain hero-gradient" id="app">
+   <!-- HERO -->
+   <header class="relative min-h-[90%] flex items-center justify-center px-6 py-20">
+    <div class="absolute top-20 left-10 w-72 h-72 bg-violet-600 rounded-full opacity-[0.03] blur-3xl"></div>
+    <div class="absolute bottom-20 right-10 w-96 h-96 bg-cyan-500 rounded-full opacity-[0.03] blur-3xl"></div>
+    <div class="max-w-4xl mx-auto text-center relative z-10">
+     <div class="anim-up anim-d1 relative inline-block mb-8">
+      <div class="w-32 h-32 rounded-full bg-gradient-to-br from-violet-500 to-violet-700 overflow-hidden mx-auto flex items-center justify-center shadow-2xl">
+       <img src="https://i.ibb.co/bj5dSnLw/Chat-GPT-Image-21-de-abr-de-2026-13-42-35.png">
+        <svg viewbox="0 0 100 100" class="w-20 h-20" fill="none" xmlns="http://www.w3.org/2000/svg">
+         <circle cx="50" cy="35" r="18" fill="rgba(255,255,255,0.9)" /> <path d="M20 70 Q20 55 50 55 Q80 55 80 70 L80 85 Q80 90 75 90 L25 90 Q20 90 20 85 Z" fill="rgba(255,255,255,0.85)" />
+        </svg>
+      </div>
+     </div>
+     <div class="anim-up anim-d2 mono text-violet-400 text-sm tracking-[4px] uppercase mb-4">
+      Criador de conteúdo com IA
+     </div>
+     <h1 class="anim-up anim-d3 text-5xl md:text-7xl font-900 text-white leading-tight mb-6" id="heroName">Estúdio de IA<br><span class="bg-gradient-to-r from-violet-400 to-cyan-400 bg-clip-text text-transparent">Criativa</span></h1>
+     <p class="anim-up anim-d4 text-lg md:text-xl text-gray-400 max-w-2xl mx-auto mb-12 leading-relaxed" id="heroTagline">Transformando ideias em realidade visual com o poder da Inteligência Artificial. Cada projeto é uma obra única.</p>
+     <div class="anim-up anim-d5 flex flex-wrap justify-center gap-3">
+      <a href="#portfolio" class="bg-violet-600 hover:bg-violet-500 text-white px-8 py-3 rounded-full font-600 transition-all duration-300 flex items-center gap-2"> <i data-lucide="eye" style="width:18px;height:18px;"></i> Ver Portfólio </a> 
+      <a href="#contact" class="border border-gray-700 hover:border-violet-500 text-gray-300 hover:text-white px-8 py-3 rounded-full font-500 transition-all duration-300 flex items-center gap-2"> <i data-lucide="mail" style="width:18px;height:18px;"></i> Contacto </a>
+     </div>
+    </div>
+   </header>
+   
+   <!-- SOBRE -->
+   <section class="px-6 py-15 relative" id="about">
+    <div class="max-w-5xl mx-auto">
+     <div class="mono text-violet-400 text-xs tracking-[4px] uppercase mb-3">Sobre</div>
+     <h2 class="text-3xl md:text-4xl font-800 text-white mb-8">IA como ferramenta<br><span class="text-gray-500">de transformação visual</span></h2>
+     <p class="text-gray-400 text-lg leading-relaxed max-w-3xl mb-10" id="aboutText">Sou especialista em criar conteúdo visual impactante utilizando as mais avançadas ferramentas de Inteligência Artificial. De restauração de fotografias antigas a criação de cenários impossíveis, cada projeto é cuidadosamente elaborado para superar expectativas e elevar marcas ao próximo nível.</p>
+     <div class="flex flex-wrap gap-2">
+      <span class="tag-pill">Canva</span> <span class="tag-pill">Photoshop</span> <span class="tag-pill">Midjourney</span> <span class="tag-pill">Image FX</span> <span class="tag-pill">ChatGPT</span> <span class="tag-pill">Gemini</span>
+     </div>
+    </div>
+   </section>
+
+   <!-- PORTFÓLIO - ANTES E DEPOIS -->
+   <section class="px-6 py-24" id="portfolio">
+    <div class="max-w-6xl mx-auto">
+     <div class="mono text-violet-400 text-xs tracking-[4px] uppercase mb-3">Portfólio</div>
+     <h2 class="text-3xl md:text-4xl font-800 text-white mb-4">Antes &amp; Depois</h2>
+     <p class="text-gray-500 mb-16 text-lg">Arraste o slider para comparar os resultados</p>
+     <div class="grid md:grid-cols-2 gap-8" id="projectGrid">
+      
+      <!-- Projeto 1 (Com as imagens do perfume) -->
+      <div class="project-card rounded-2xl overflow-hidden bg-[#111115] border border-gray-800/50">
+       <div class="ba-container" style="--slider-pos:50%;--clip-right:50%;">
+        <!-- IMAGEM DE DEPOIS (Modelo gerada por IA) -->
+        <img class="ba-after" src="https://i.ibb.co/PZ4xpP1D/Gemini-Generated-Image-1dl2wb1dl2wb1dl2-processed-lightpdf-com.png" alt="Gemini Generated Image 1dl2wb1dl2wb1dl2 processed(lightpdf com)" border="0" alt="Produto Premium - Depois">
+        <!-- IMAGEM DE ANTES (A fotografia original) -->
+        <img class="ba-before" src="https://i.ibb.co/kVDJYYjS/Gemini-Generated-Image-8up4yy8up4yy8up4-processed-lightpdf-com.png" alt="Gemini Generated Image 8up4yy8up4yy8up4 processed(lightpdf com)" border="0" alt="Antes">
+        <div class="ba-slider-line"></div>
+        <div class="ba-slider-handle">
+         <svg width="20" height="20" viewbox="0 0 20 20" fill="none"><path d="M6 10L2 10M2 10L5 7M2 10L5 13M14 10L18 10M18 10L15 7M18 10L15 13" stroke="#333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /></svg>
+        </div>
+        <div class="ba-label ba-label-before">Antes</div><div class="ba-label ba-label-after">Depois</div>
+       </div>
+       <div class="p-5">
+        <div class="flex gap-2 mb-3"><span class="tag-pill">Produto</span><span class="tag-pill">Publicidade</span></div>
+        <h3 class="text-white font-700 text-lg mb-1">Produto Cosmético Premium</h3>
+        <p class="text-gray-500 text-sm">Fotografia amadora transformada em imagem publicitária profissional com modelo gerada por IA</p>
+       </div>
+      </div>
+
+      <!-- Projeto 2 -->
+      <div class="project-card rounded-2xl overflow-hidden bg-[#111115] border border-gray-800/50">
+       <div class="ba-container" style="--slider-pos:50%;--clip-right:50%;">
+        <!-- IMAGEM DE DEPOIS (Modelo gerada por IA) -->
+        <img class="ba-after" src="https://i.ibb.co/4Z9nCJyh/Gemini-Generated-Image-jxu59tjxu59tjxu5-processed-lightpdf-com.png" alt="Gemini Generated Image jxu59tjxu59tjxu5 processed(lightpdf com)" border="0" alt="Produto Premium - Depois">
+        <!-- IMAGEM DE ANTES (A fotografia original) -->
+        <img class="ba-before" src="https://i.ibb.co/7NW53Nmt/Gemini-Generated-Image-n1n6dgn1n6dgn1n6-processed-lightpdf-com.png" alt="Gemini Generated Image n1n6dgn1n6dgn1n6 processed(lightpdf com)" border="0" alt="Antes">
+        <div class="ba-slider-line"></div>
+        <div class="ba-slider-handle">
+         <svg width="20" height="20" viewbox="0 0 20 20" fill="none"><path d="M6 10L2 10M2 10L5 7M2 10L5 13M14 10L18 10M18 10L15 7M18 10L15 13" stroke="#333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /></svg>
+        </div>
+        <div class="ba-label ba-label-before">Antes</div><div class="ba-label ba-label-after">Depois</div>
+       </div>
+       <div class="p-5">
+        <div class="flex gap-2 mb-3"><span class="tag-pill">Food</span><span class="tag-pill">Branding</span></div>
+        <h3 class="text-white font-700 text-lg mb-1">Restaurante &amp; Gastronomia</h3>
+        <p class="text-gray-500 text-sm">Fotografia gastronomica elevada com IA para ementa digital</p>
+       </div>
+      </div>
+
+      <!-- Projeto 3 -->
+      <div class="project-card rounded-2xl overflow-hidden bg-[#111115] border border-gray-800/50">
+       <div class="ba-container" style="--slider-pos:50%;--clip-right:50%;">
+        <!-- IMAGEM DE DEPOIS (Modelo gerada por IA) -->
+        <img class="ba-after" src="https://i.ibb.co/pv0sHPmd/Chat-GPT-Image-22-de-abr-de-2026-16-16-35.png" alt="Chat GPT Image 22 de abr de 2026 16 16 35" border="0" alt="Produto Premium - Depois">
+        <!-- IMAGEM DE ANTES (A fotografia original) -->
+        <img class="ba-before" src="https://i.ibb.co/7J8k4S2T/Chat-GPT-Image-22-de-abr-de-2026-16-12-25.png" alt="Chat GPT Image 22 de abr de 2026 16 12 25" border="0" alt="Antes">
+        <div class="ba-slider-line"></div>
+        <div class="ba-slider-handle">
+         <svg width="20" height="20" viewbox="0 0 20 20" fill="none"><path d="M6 10L2 10M2 10L5 7M2 10L5 13M14 10L18 10M18 10L15 7M18 10L15 13" stroke="#333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /></svg>
+        </div>
+        <div class="ba-label ba-label-before">Antes</div><div class="ba-label ba-label-after">Depois</div>
+       </div>
+       <div class="p-5">
+        <div class="flex gap-2 mb-3"><span class="tag-pill">E-commerce</span><span class="tag-pill">Moda</span></div>
+        <h3 class="text-white font-700 text-lg mb-1">Moda &amp; E-commerce</h3>
+        <p class="text-gray-500 text-sm">Criação de modelo e cenário virtual para catálogo de moda</p>
+       </div>
+      </div>
+
+      <!-- Projeto 4 -->
+      <div class="project-card rounded-2xl overflow-hidden bg-[#111115] border border-gray-800/50">
+       <div class="ba-container" style="--slider-pos:50%;--clip-right:50%;">
+        <!-- IMAGEM DE DEPOIS (Modelo gerada por IA) -->
+        <img class="ba-after" src="https://i.ibb.co/NnfyP976/Chat-GPT-Image-22-de-abr-de-2026-16-33-52.png" alt="Chat GPT Image 22 de abr de 2026 16 33 52" border="0" alt="Produto Premium - Depois">
+        <!-- IMAGEM DE ANTES (A fotografia original) -->
+        <img class="ba-before" src="https://i.ibb.co/pBMNMg2m/Chat-GPT-Image-22-de-abr-de-2026-16-31-12.png" alt="Chat GPT Image 22 de abr de 2026 16 31 12" border="0" alt="Antes">
+        <div class="ba-slider-line"></div>
+        <div class="ba-slider-handle">
+         <svg width="20" height="20" viewbox="0 0 20 20" fill="none"><path d="M6 10L2 10M2 10L5 7M2 10L5 13M14 10L18 10M18 10L15 7M18 10L15 13" stroke="#333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /></svg>
+        </div>
+        <div class="ba-label ba-label-before">Antes</div><div class="ba-label ba-label-after">Depois</div>
+       </div>
+       <div class="p-5">
+        <div class="flex gap-2 mb-3"><span class="tag-pill">Imobiliário</span><span class="tag-pill">Virtual Staging</span></div>
+        <h3 class="text-white font-700 text-lg mb-1">Imobiliária Virtual</h3>
+        <p class="text-gray-500 text-sm">Virtual staging: espaços vazios transformados em decorados</p>
+       </div>
+      </div>
+     </div>
+    </div>
+   </section>
+
+
+<!-- Projeto 5 -->
+<div class="project-card rounded-2xl overflow-hidden bg-[#111115] border border-gray-800/50">
+
+  <div class="flex justify-center py-6 bg-black">
+    
+    <div style="width:80%; position:relative;">
+      
+      <div style="padding:56.25% 0 0 0;position:relative;">
+        <iframe 
+          id="vimeoPlayer"
+          src="https://player.vimeo.com/video/1185645090?autoplay=1&loop=1&muted=1"
+          frameborder="0"
+          allow="autoplay; fullscreen; picture-in-picture"
+          style="position:absolute;top:0;left:0;width:100%;height:100%;border-radius:16px;"
+        ></iframe>
+      </div>
+
+      <!-- Botão de som -->
+      <button id="unmuteBtn"
+        style="position:absolute;bottom:20px;right:20px;
+        background:rgba(0,0,0,0.7);
+        color:#fff;
+        padding:10px 14px;
+        border-radius:8px;
+        border:none;
+        cursor:pointer;">
+        🔊 Ativar som
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+
+<script src="https://player.vimeo.com/api/player.js"></script>
+
+<script>
+  const iframe = document.getElementById('vimeoPlayer');
+  const player = new Vimeo.Player(iframe);
+
+  const btn = document.getElementById('unmuteBtn');
+
+  btn.addEventListener('click', async () => {
+    try {
+      await player.setMuted(false);
+      await player.setVolume(1);
+      btn.style.display = "none"; // esconde botão após ativar
+    } catch (e) {
+      console.log("Erro ao ativar som:", e);
+    }
+  });
+</script>
+
+  <!-- Conteúdo -->
+  <div class="p-5">
+    <div class="flex gap-2 mb-3">
+  </div>
+
+    <h3 class="text-white font-700 text-lg mb-1">
+      Divulgadora de Produtos
+    </h3>
+
+    <p class="text-gray-500 text-sm">
+      Modelo de IA: Geramos o modelo e o vídeo de apresentação do seu produto.
+    </p>
+  </div>
+
+</div>
+
+
+   <!-- SERVIÇOS -->
+   <section class="px-6 py-24" id="services">
+    <div class="max-w-6xl mx-auto">
+     <div class="mono text-violet-400 text-xs tracking-[4px] uppercase mb-3">
+      Serviços
+     </div>
+     <h2 class="text-3xl md:text-4xl font-800 text-white mb-16">O que posso fazer <span class="text-gray-500">por si</span></h2>
+     <div class="grid md:grid-cols-2 gap-6" id="servicesGrid"></div>
+    </div>
+   </section>
+
+   <!-- CONTATO -->
+
+   <section class="px-6 py-15" id="contact">
+    <div class="max-w-2xl mx-auto text-center">
+     <div class="mono text-violet-400 text-xs tracking-[4px] uppercase mb-3">Contato</div>
+     <h2 class="text-3xl md:text-4xl font-800 text-white mb-6">Vamos criar algo <span class="bg-gradient-to-r from-violet-400 to-cyan-400 bg-clip-text text-transparent">incrível</span>?</h2>
+     <p class="text-gray-400 mb-10">Entre em contato e vamos transformar as suas ideias em realidade.</p>
+     <form id="contactForm" class="text-left space-y-5">
+     <form action="https://formsubmit.co/simonesanttos25@outlook.com" method="POST">
+	
+	<!-- Campos do formulário -->
+	<div>
+	<label for="cf-name" class="block text-sm text-gray-400 mb-2">Nome</label> 
+  	<input type="text" id="cf-name" class="w-full bg-white/5 border border-gray-800 focus:border-violet-500 rounded-xl px-5 py-3 text-white outline-none transition-colors" placeholder="O seu nome">
+      	</div>
+	<div>
+        <label for="cf-email" class="block text-sm text-gray-400 mb-2">Email</label> 
+        <input type="email" id="email" placeholder="Seu e-mail" required class="w-full bg-white/5 border border-gray-800 focus:border-violet-500 rounded-xl px-5 py-3 text-white outline-none transition-colors" placeholder="oseu@email.com">
+	>
+	  <p id="erroEmail" style="color:red; display:none; font-size:14px;">
+    	  Digite um e-mail válido.
+  	</p>        
+	</div>
+	<div>
+        <label for="cf-msg" class="block text-sm text-gray-400 mb-2">Mensagem</label> 
+        <textarea id="cf-msg" rows="4" class="w-full bg-white/5 border border-gray-800 focus:border-violet-500 rounded-xl px-5 py-3 text-white outline-none transition-colors resize-none" placeholder="Descreva o seu projeto..."></textarea>
+        </div>
+		  
+  <!-- Anti-spam -->
+  <input type="hidden" name="_captcha" value="false">
+
+  <!-- Redirecionamento após envio -->
+  <input type="hidden" name="_next" value="https://seusite.com/obrigado.html">
+
+  <!-- Botão -->
+  <button type="submit" class="w-full bg-violet-600 hover:bg-violet-500 text-white py-4 rounded-xl font-600 transition-all duration-300 flex items-center justify-center gap-2"> 
+    <i data-lucide="send" style="width:18px;height:18px;"></i> 
+    Enviar Mensagem 
+  </button>
+</form>
+<script>
+  const form = document.getElementById("formContato");
+  const email = document.getElementById("email");
+  const erro = document.getElementById("erroEmail");
+
+  form.addEventListener("submit", function(e) {
+    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (!regex.test(email.value)) {
+      e.preventDefault(); // impede envio
+      erro.style.display = "block";
+      email.style.border = "2px solid red";
+    } else {
+      erro.style.display = "none";
+      email.style.border = "2px solid green";
+    }
+  });
+</script>
+        
+      <div id="formMsg" class="hidden text-center py-3 rounded-xl text-sm font-500"></div>
+     </form>
+    </div>
+   </section>
+
+   <!-- RODAPÉ -->
+   <footer class="px-6 py-12 border-t border-gray-800/50">
+    <div class="max-w-5xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+     <div class="text-gray-600 text-sm">
+      © 2026 Estúdio de IA Criativo. Todos os direitos reservados.
+     </div>
+     <div class="flex gap-5">
+      <a href="https://www.instagram.com/simoneamigo_/" class="text-gray-600 hover:text-violet-400 transition-colors"><i data-lucide="instagram" style="width:20px;height:20px;"></i></a> 
+      </div>
+    </div>
+   </footer>
+  </div>
+
+  <script>
+// === DADOS DOS SERVIÇOS ===
+const services = [
+  { icon: "image", title: "Fotografias de Produto", desc: "Transformo fotografias simples em imagens publicitárias profissionais com cenários e iluminação perfeitos." },
+  { icon: "palette", title: "Identidade Visual", desc: "Criação de logótipos, paletas de cores e materiais de branding únicos utilizando IA generativa." },
+  { icon: "home", title: "Virtual Staging", desc: "Espaços vazios ganham vida com decoração virtual fotorrealista para o mercado imobiliário." },
+  { icon: "refresh-cw", title: "Restauro de Fotografias", desc: "Fotografias antigas, danificadas ou a preto e branco são restauradas, colorizadas e ganham nova vida." },
+  { icon: "video", title: "Vídeo com IA", desc: "Animações e vídeos curtos criados com ferramentas de IA para redes sociais e anúncios." },
+  { icon: "wand-2", title: "Edição Avançada", desc: "Remoção de fundo, troca de cenários, correção facial e muito mais com precisão de IA." }
+];
+
+// === FUNÇÃO DO SLIDER ===
+function setupSlider(container) {
+  let active = false;
+  
+  const move = (clientX) => {
+    const rect = container.getBoundingClientRect();
+    let pct = ((clientX - rect.left) / rect.width) * 100;
+    pct = Math.max(0, Math.min(100, pct)); // Trava o limite entre 0 e 100
+    
+    container.style.setProperty('--slider-pos', pct + '%');
+    container.style.setProperty('--clip-right', (100 - pct) + '%');
+  };
+  
+  const startDrag = (e) => { 
+    active = true; 
+    move(e.clientX || (e.touches && e.touches[0].clientX)); 
+  };
+  const stopDrag = () => { active = false; };
+  
+  // Eventos de Rato (Mouse)
+  container.addEventListener('mousedown', startDrag);
+  window.addEventListener('mousemove', (e) => { if (active) move(e.clientX); });
+  window.addEventListener('mouseup', stopDrag);
+  
+  // Eventos de Toque (Mobile)
+  container.addEventListener('touchstart', startDrag, {passive: true});
+  window.addEventListener('touchmove', (e) => { if (active) move(e.touches[0].clientX); }, {passive: true});
+  window.addEventListener('touchend', stopDrag);
+}
+
+// === RENDERIZAR SERVIÇOS ===
+function buildServices() {
+  const grid = document.getElementById('servicesGrid');
+  if (!grid) return;
+  grid.innerHTML = '';
+  services.forEach(s => {
+    const div = document.createElement('div');
+    div.className = 'service-card p-6 rounded-2xl bg-[#111115] border border-gray-800/50';
+    div.innerHTML = `
+      <div class="w-12 h-12 rounded-xl bg-[#1a1a2e] flex items-center justify-center mb-5">
+        <i data-lucide="${s.icon}" style="width:24px;height:24px;" class="text-violet-500"></i>
+      </div>
+      <h3 class="text-white font-700 text-lg mb-2">${s.title}</h3>
+      <p class="text-gray-500 text-sm leading-relaxed">${s.desc}</p>
+    `;
+    grid.appendChild(div);
+  });
+}
+
+// === INICIALIZAÇÃO ===
+function initApp() {
+  // Inicializa todos os sliders na página
+  document.querySelectorAll('.ba-container').forEach(setupSlider);
+  buildServices();
+  
+  // Inicia os ícones Lucide
+  if (typeof lucide !== 'undefined') {
+    lucide.createIcons();
+  }
+}
+
+document.addEventListener('DOMContentLoaded', initApp);
+
+// === FORMULÁRIO DE CONTACTO ===
+document.getElementById('contactForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+  const msgEl = document.getElementById('formMsg');
+  msgEl.className = 'text-center py-3 rounded-xl text-sm font-500 bg-green-500/10 text-green-400 border border-green-500/20';
+  msgEl.textContent = '✓ Mensagem enviada com sucesso!';
+  msgEl.classList.remove('hidden');
+  this.reset();
+  setTimeout(() => msgEl.classList.add('hidden'), 4000);
+});
+  </script>
+ </body>
+</html>
