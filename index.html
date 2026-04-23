@@ -13,6 +13,35 @@
     * { margin: 0; padding: 0; box-sizing: border-box; }
     html, body { height: 100%; }
 
+.cta-btn {
+  background: linear-gradient(135deg, #7c3aed, #a855f7);
+  color: white;
+  transition: all 0.3s ease;
+  box-shadow: 0 10px 30px rgba(124,58,237,0.4);
+}
+
+.cta-btn:hover {
+  transform: translateY(-3px) scale(1.03);
+  box-shadow: 0 15px 40px rgba(124,58,237,0.6);
+}
+ 
+
+.card-beneficio {
+  background: radial-gradient(circle at top, #111827, #020617);
+  border: 1px solid rgba(255,255,255,0.08);
+  padding: 20px;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+}
+
+.card-beneficio:hover {
+  transform: translateY(-5px);
+  border-color: rgba(139,92,246,0.5);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+}
+
+
 .project-card:hover {
   transform: translateY(-8px) scale(1.02);
   transition: all 0.3s ease;
@@ -187,9 +216,14 @@ button:hover {
     Imagens criadas com inteligência artificial para destacar seu produto com mais qualidade e presença visual
   </p>
 
-  <a href="#contato" class="bg-violet-600 px-8 py-4 rounded-xl">
-    Quero transformar minhas imagens
-  </a>
+<!-- BOTÃO -->
+    <a href="#contato" 
+       class="cta-btn inline-flex items-center gap-2 px-8 py-4 rounded-full font-medium">
+       
+      Quero elevar o nível das minhas imagens
+      
+    </a>
+  
 </section>
 
 <!-- PORTFÓLIO - ANTES E DEPOIS -->
@@ -284,17 +318,31 @@ button:hover {
    </section>
 
 <!-- CTA -->
-<section class="text-center py-16 px-6">
-  <h2 class="text-3xl mb-4">Quer vender mais com suas imagens?</h2>
+<section class="py-24 px-6 relative overflow-hidden">
 
-  <p class="text-gray-400 mb-10">
-    O próximo passo é simples
-  </p>
+  <!-- FUNDO GRADIENTE SUAVE -->
+  
+  <div class="relative max-w-3xl mx-auto text-center">
 
-  <a href="#contato" class="bg-violet-600 px-8 py-4 rounded-xl">
-    Quero um orçamento agora
-  </a>
- </section>
+    <h2 class="text-3xl md:text-4xl font-semibold mb-4 leading-tight">
+      Quer melhorar a apresentação das suas imagens?
+    </h2>
+
+    <p class="text-gray-400 mb-8">
+      O próximo passo é simples
+    </p>
+
+    <!-- BOTÃO -->
+    <a href="#contato" 
+       class="cta-btn inline-flex items-center gap-2 px-8 py-4 rounded-full font-medium">
+       
+      Solicitar Orçamento
+      
+    </a>
+
+  </div>
+
+</section>
 
 <!-- VÍDEO -->
 <section class="text-center px-6 py-20">
@@ -319,16 +367,47 @@ button:hover {
 </section>
 
 <!-- BENEFÍCIOS -->
-<section class="px-6 py-16 text-center">
-  <h2 class="text-3xl mb-10">Por que usar IA nas suas imagens?</h2>
+<section class="py-24 px-6">
+  <div class="max-w-4xl mx-auto text-center">
 
-  <div class="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto text-left">
-    <p>✔ Visual profissional sem custo alto</p>
-    <p>✔ Mais valor percebido no produto</p>
-    <p>✔ Aumenta cliques e atenção</p>
-    <p>✔ Ideal para redes sociais e anúncios</p>
+    <p class="text-sm text-violet-400 mb-3 tracking-widest uppercase">
+      Mais do que estética
+    </p>
+
+    <h2 class="text-3xl md:text-4xl font-semibold mb-6">
+      Por que usar inteligência artificial nas suas imagens?
+    </h2>
+
+    <p class="text-gray-400 max-w-2xl mx-auto mb-12 leading-relaxed">
+      Uma forma mais eficiente de apresentar seu produto com qualidade visual e consistência,
+      sem depender de produções complexas.
+    </p>
+
+    <!-- CARDS -->
+    <div class="grid md:grid-cols-2 gap-6 text-left">
+
+      <div class="card-beneficio">
+        ✦ Qualidade visual mais refinada
+      </div>
+
+      <div class="card-beneficio">
+        ✦ Apresentação mais cuidadosa
+      </div>
+
+      <div class="card-beneficio">
+        ✦ Consistência estética
+      </div>
+
+      <div class="card-beneficio">
+        ✦ Versatilidade de uso
+      </div>
+
+    </div>
+
   </div>
+
 </section>
+
 
 <!-- CONTATO -->
 
