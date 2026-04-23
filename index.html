@@ -27,25 +27,37 @@
  
 
 .card-beneficio {
-  background: radial-gradient(circle at top, #111827, #020617);
-  border: 1px solid rgba(255,255,255,0.08);
-  padding: 20px;
-  border-radius: 12px;
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  background: rgba(255,255,255,0.02);
+  border: 1px solid rgba(255,255,255,0.06);
+  padding: 18px;
+  border-radius: 14px;
   transition: all 0.3s ease;
-  backdrop-filter: blur(10px);
 }
 
 .card-beneficio:hover {
-  transform: translateY(-5px);
-  border-color: rgba(139,92,246,0.5);
-  box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+  transform: translateY(-6px);
+  border-color: rgba(139,92,246,0.6);
+  box-shadow: 0 15px 40px rgba(0,0,0,0.5);
 }
 
-
-.project-card:hover {
-  transform: translateY(-8px) scale(1.02);
-  transition: all 0.3s ease;
+.icon {
+  color: #a855f7;
+  font-size: 18px;
 }
+
+.titulo {
+  font-weight: 600;
+  color: white;
+}
+
+.desc {
+  font-size: 14px;
+  color: #9ca3af;
+}
+
 
 button:hover {
   transform: scale(1.03);
@@ -150,38 +162,13 @@ button:hover {
     .ba-label-before { left: 12px; background: rgba(0,0,0,0.6); color: #fff; backdrop-filter: blur(4px); }
     .ba-label-after { right: 12px; background: rgba(255,255,255,0.9); color: #000; backdrop-filter: blur(4px); }
 
-    /* Fundo gradiente animado */
-    @keyframes gradShift {
-      0%, 100% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-    }
-    .hero-gradient {
-      background: linear-gradient(135deg, #0a0a0a 0%, #1a0a2e 25%, #0a0a0a 50%, #0d1b2a 75%, #0a0a0a 100%);
-      background-size: 400% 400%;
-      animation: gradShift 15s ease infinite;
-    }
-
-    /* Animações de entrada */
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(40px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    .anim-up {
-      opacity: 0;
-      animation: fadeUp 0.8s ease forwards;
-    }
-    .anim-d1 { animation-delay: 0.1s; }
-    .anim-d2 { animation-delay: 0.2s; }
-    .anim-d3 { animation-delay: 0.3s; }
-    .anim-d4 { animation-delay: 0.4s; }
-    .anim-d5 { animation-delay: 0.5s; }
+    /* Fundo*/
+   background: radial-gradient(circle at top, #1e1b4b, #020617 70%);
 
     /* Scrollbar */
     .portfolio-wrap::-webkit-scrollbar { width: 6px; }
     .portfolio-wrap::-webkit-scrollbar-track { background: #0a0a0a; }
     .portfolio-wrap::-webkit-scrollbar-thumb { background: #333; border-radius: 3px; }
-
-    
 
     /* Estilo das Tags (Pills) */
     .tag-pill {
@@ -202,8 +189,7 @@ button:hover {
 
 <!-- HERO -->
 <section class="text-center py-20 px-6">
-  <img src="https://i.ibb.co/bj5dSnLw/Chat-GPT-Image-21-de-abr-de-2026-13-42-35.png" class="w-32 mx-auto rounded-full mb-6">
-
+  
   <h1 class="text-4xl md:text-6xl font-bold mb-8">
     Transformo imagens comuns em peças visuais mais profissionais e atrativas
   </h1>
@@ -318,7 +304,7 @@ button:hover {
    </section>
 
 <!-- CTA -->
-<section class="py-24 px-6 relative overflow-hidden">
+<section class="py-20 px-6 relative overflow-hidden">
 
   <!-- FUNDO GRADIENTE SUAVE -->
   
@@ -378,29 +364,48 @@ button:hover {
       Por que usar inteligência artificial nas suas imagens?
     </h2>
 
-    <p class="text-gray-400 max-w-2xl mx-auto mb-12 leading-relaxed">
-      Uma forma mais eficiente de apresentar seu produto com qualidade visual e consistência,
-      sem depender de produções complexas.
+    <p class="text-gray-400 mb-4">
+     Uma forma mais eficiente de apresentar seu produto
+    </p>
+
+    <p class="text-gray-500 text-sm mb-6">
+    Com mais qualidade visual e consistência, sem depender de produções complexas
     </p>
 
     <!-- CARDS -->
-    <div class="grid md:grid-cols-2 gap-6 text-left">
+    <div class="grid md:grid-cols-2 gap-3 text-left">
+
+<div class="card-beneficio">
+  <span class="icon">✦</span>
+  <div>
+    <p class="titulo">Qualidade visual</p>
+    <p class="desc">Acabamento mais refinado</p>
+  </div>
+</div>      
 
       <div class="card-beneficio">
-        ✦ Qualidade visual mais refinada
-      </div>
+  <span class="icon">✦</span>
+  <div>
+    <p class="titulo">Consistência visual</p>
+    <p class="desc">Identidade mais alinhada entre as imagens</p>
+  </div>
+</div>  
 
       <div class="card-beneficio">
-        ✦ Apresentação mais cuidadosa
-      </div>
+  <span class="icon">✦</span>
+  <div>
+    <p class="titulo">Apresentação refinada</p>
+    <p class="desc">Valorização mais sutil do produto</p>
+  </div>
+</div>  
 
       <div class="card-beneficio">
-        ✦ Consistência estética
-      </div>
-
-      <div class="card-beneficio">
-        ✦ Versatilidade de uso
-      </div>
+  <span class="icon">✦</span>
+  <div>
+    <p class="titulo">Versatilidade de aplicação</p>
+    <p class="desc">Flexibilidade para diferentes formatos</p>
+  </div>
+</div>  
 
     </div>
 
