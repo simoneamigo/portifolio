@@ -13,6 +13,15 @@
     * { margin: 0; padding: 0; box-sizing: border-box; }
     html, body { height: 100%; }
 
+.project-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  transition: all 0.3s ease;
+}
+
+button:hover {
+  transform: scale(1.03);
+}
+
 .insta-btn {
   background: linear-gradient(45deg, #833AB4, #FD1D1D, #F77737);
   color: white;
@@ -143,15 +152,7 @@
     .portfolio-wrap::-webkit-scrollbar-track { background: #0a0a0a; }
     .portfolio-wrap::-webkit-scrollbar-thumb { background: #333; border-radius: 3px; }
 
-    /* Efeito Hover nos cartões */
-    .project-card, .service-card {
-      transition: transform 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease;
-    }
-    .project-card:hover, .service-card:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 20px 60px rgba(139,92,246,0.12);
-      border-color: rgba(139,92,246,0.3);
-    }
+    
 
     /* Estilo das Tags (Pills) */
     .tag-pill {
@@ -174,12 +175,16 @@
 <section class="text-center py-20 px-6">
   <img src="https://i.ibb.co/bj5dSnLw/Chat-GPT-Image-21-de-abr-de-2026-13-42-35.png" class="w-32 mx-auto rounded-full mb-6">
 
-  <h1 class="text-4xl md:text-6xl font-bold mb-4">
-    Transformo imagens comuns em peças publicitárias que vendem
+  <h1 class="text-4xl md:text-6xl font-bold mb-8">
+    Transformo imagens comuns em peças visuais mais profissionais e atrativas
   </h1>
+  
+  <h1 class="text-3xl md:text-3xl font-bold mb-8">
+   Mais atenção. Mais valor percebido. Mais vendas.
+   </h1>
 
   <p class="text-gray-400 max-w-2xl mx-auto mb-8">
-    Criação de imagens profissionais com IA para marcas, produtos e negócios que querem se destacar e aumentar suas vendas
+    Imagens criadas com inteligência artificial para destacar seu produto com mais qualidade e presença visual
   </p>
 
   <a href="#contato" class="bg-violet-600 px-8 py-4 rounded-xl">
@@ -188,7 +193,7 @@
 </section>
 
 <!-- PORTFÓLIO - ANTES E DEPOIS -->
-   <section class="px-6 py-24" id="portfolio">
+   <section class="px-6 py-20" id="portfolio">
     <div class="max-w-6xl mx-auto">
      <div class="mono text-violet-400 text-xs tracking-[4px] uppercase mb-3">Portfólio</div>
      <h2 class="text-3xl md:text-4xl font-800 text-white mb-4">Antes &amp; Depois</h2>
@@ -278,9 +283,22 @@
     </div>
    </section>
 
+<!-- CTA -->
+<section class="text-center py-16 px-6">
+  <h2 class="text-3xl mb-4">Quer vender mais com suas imagens?</h2>
+
+  <p class="text-gray-400 mb-10">
+    O próximo passo é simples
+  </p>
+
+  <a href="#contato" class="bg-violet-600 px-8 py-4 rounded-xl">
+    Quero um orçamento agora
+  </a>
+ </section>
+
 <!-- VÍDEO -->
-<section class="text-center px-6 py-16">
-  <h2 class="text-3xl mb-4">Veja a transformação na prática</h2>
+<section class="text-center px-6 py-20">
+  <h2 class="text-3xl mb-6">⚡ Veja na prática, em menos de 10 segundos, o impacto dessa transformação ⚡</h2>
 
   <div class="flex justify-center">
     <div style="width:80%;">
@@ -312,32 +330,17 @@
   </div>
 </section>
 
-<!-- CTA -->
-<section class="text-center py-16 px-6">
-  <h2 class="text-3xl mb-4">Quer vender mais com suas imagens?</h2>
-
-  <p class="text-gray-400 mb-8">
-    O próximo passo é simples:
-  </p>
-
-  <a href="#contato" class="bg-violet-600 px-8 py-4 rounded-xl">
-    Quero um orçamento agora
-  </a>
-</section>
-
 <!-- CONTATO -->
-<section id="contato" class="px-6 py-20 max-w-xl mx-auto">
 
-  <h2 class="text-3xl text-center mb-6">
-    Vamos criar algo incrível?
-  </h2>
-
-  <p class="text-gray-400 text-center mb-10">
-    Me envie uma mensagem e eu te respondo o mais rápido possível.
-  </p>
+   <section class="px-6 py-20" id="contato">
+    <div class="max-w-2xl mx-auto text-center">
+     <h2 class="text-3xl md:text-4xl font-800 text-white mb-6">Vamos criar algo <span class="bg-gradient-to-r from-violet-400 to-cyan-400 bg-clip-text text-transparent">incrível</span>?</h2>
+     <p class="text-gray-400">Se você chegou até aqui, provavelmente precisa melhorar suas imagens.</p>
+     <p class="text-gray-400 mb-10">Entre em contato e vamos transformar as suas ideias em realidade.</p>
 
   <!-- FORMULÁRIO FUNCIONANDO -->
-  <form id="formContato" class="space-y-4">
+
+  <form id="formContato" class="space-y-2">
 
   <input type="text" name="nome" placeholder="Seu nome" required 
     class="w-full p-4 rounded-lg bg-white/5 border border-gray-700 focus:border-violet-500 outline-none">
@@ -371,35 +374,34 @@
   ❌ Erro ao enviar. Tente novamente.
 </p>
 
-  <!-- FRASE FINAL (ALTA CONVERSÃO) -->
-  <p class="text-gray-500 text-center mt-10">
-    Se você chegou até aqui, provavelmente suas imagens podem melhorar — e isso pode estar te fazendo perder vendas.
-  </p>
-
-</section>
+  </section>
 
 <!-- RODAPÉ -->
-   <footer class="px-6 py-12 border-t border-gray-800/50">
-    <div class="max-w-5xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
-     <div class="text-gray-600 text-sm">
-      © 2026 Estúdio de IA Criativo. Todos os direitos reservados.
-     </div>
-     <div class="flex justify-center mt-10">
+<footer class="text-center py-10 px-6">
 
-  <a href="https://www.instagram.com/simoneamigo_/" 
-     target="_blank"
-     rel="noopener noreferrer"
-     class="insta-btn flex items-center gap-3 px-6 py-3 rounded-full">
+  <!-- BOTÃO INSTAGRAM -->
+  <div class="flex justify-center mb-6">
+    
+    <a href="https://www.instagram.com/simoneamigo_/" 
+       target="_blank"
+       rel="noopener noreferrer"
+       class="insta-btn flex items-center gap-3 px-6 py-3 rounded-full">
 
-    <i data-lucide="instagram" style="width:22px;height:22px;"></i>
-    <span>Ver mais no Instagram</span>
+      <i data-lucide="instagram" style="width:22px;height:22px;"></i>
+      <span>Ver mais no Instagram</span>
 
-  </a>
+    </a>
 
-</div>
-    </div>
-   </footer>
   </div>
+
+  <!-- TEXTO -->
+  <div class="max-w-5xl mx-auto">
+    <p class="text-gray-600">
+      © 2026 Estúdio de IA Criativo. Todos os direitos reservados.
+    </p>
+  </div>
+
+</footer>
 
   <script>
 // === DADOS DOS SERVIÇOS ===
