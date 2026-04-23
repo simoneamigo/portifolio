@@ -1,611 +1,453 @@
 <!doctype html>
-<html lang="pt-PT" class="h-full">
+<html lang="pt-BR" class="h-full">
  <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Estúdio de IA Criativa</title>
-  
+  <title>Estrutura Digital Completa</title>
   <script src="https://cdn.tailwindcss.com/3.4.17"></script>
   <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&amp;family=Space+Mono:wght@400;700&amp;display=swap" rel="stylesheet">
-  
+  <script src="/_sdk/element_sdk.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet">
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     html, body { height: 100%; }
+    body { font-family: 'Inter', sans-serif; background: #000000; }
+    .heading { font-family: 'Plus Jakarta Sans', sans-serif; }
 
-.cta-btn {
-  background: linear-gradient(135deg, #7c3aed, #a855f7);
-  color: white;
-  transition: all 0.3s ease;
-  box-shadow: 0 10px 30px rgba(124,58,237,0.4);
-}
+    .fade-up { opacity: 0; transform: translateY(30px); animation: fadeUp 0.8s ease forwards; }
+    @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
+    .delay-1 { animation-delay: 0.1s; }
+    .delay-2 { animation-delay: 0.2s; }
+    .delay-3 { animation-delay: 0.3s; }
+    .delay-4 { animation-delay: 0.4s; }
+    .delay-5 { animation-delay: 0.5s; }
+    .delay-6 { animation-delay: 0.6s; }
 
-.cta-btn:hover {
-  transform: translateY(-3px) scale(1.03);
-  box-shadow: 0 15px 40px rgba(124,58,237,0.6);
-}
- 
+    .card-hover { transition: all 0.3s ease; }
+    .card-hover:hover { transform: translateY(-8px); box-shadow: 0 20px 40px rgba(0, 212, 255, 0.1); }
 
-.card-beneficio {
-  display: flex;
-  gap: 12px;
-  align-items: flex-start;
-  background: rgba(255,255,255,0.02);
-  border: 1px solid rgba(255,255,255,0.06);
-  padding: 18px;
-  border-radius: 14px;
-  transition: all 0.3s ease;
-}
+    .btn-primary { transition: all 0.3s ease; font-weight: 600; }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 12px 24px rgba(0, 212, 255, 0.3); }
 
-.card-beneficio:hover {
-  transform: translateY(-6px);
-  border-color: rgba(139,92,246,0.6);
-  box-shadow: 0 15px 40px rgba(0,0,0,0.5);
-}
+    .package-card { transition: all 0.3s ease; position: relative; border-radius: 16px; }
+    .package-card.featured { transform: scale(1.05); }
+    .package-card:hover { transform: translateY(-12px); }
 
-.icon {
-  color: #a855f7;
-  font-size: 18px;
-}
-
-.titulo {
-  font-weight: 600;
-  color: white;
-}
-
-.desc {
-  font-size: 14px;
-  color: #9ca3af;
-}
-
-
-button:hover {
-  transform: scale(1.03);
-}
-
-.insta-btn {
-  background: linear-gradient(45deg, #833AB4, #FD1D1D, #F77737);
-  color: white;
-  font-weight: 600;
-  transition: all 0.3s ease;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.3);
-}
-
-.insta-btn:hover {
-  transform: scale(1.05);
-  box-shadow: 0 15px 35px rgba(0,0,0,0.5);
-}
-
-.insta-btn span {
-  font-size: 14px;
-}
-
-    .portfolio-wrap {
-      font-family: 'Outfit', sans-serif;
-      height: 100%;
-      width: 100%;
-      overflow-y: auto;
-      overflow-x: hidden;
+    .gradient-text {
+      background: linear-gradient(135deg, #00d4ff 0%, #00a8d8 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
     }
 
-    .mono { font-family: 'Space Mono', monospace; }
-
-    /* Efeito de ruído (Grain) */
-    .grain::before {
-      content: '';
-      position: fixed;
-      top: 0; left: 0; width: 100%; height: 100%;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
-      pointer-events: none;
-      z-index: 9999;
+    .gradient-neon {
+      background: linear-gradient(90deg, #00d4ff 0%, #a855f7 50%, #ec4899 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
     }
 
-    /* Slider Antes/Depois */
-    .ba-container {
-      position: relative;
-      width: 100%;
-      overflow: hidden;
-      border-radius: 16px;
-      cursor: ew-resize; /* Cursor para arrastar */
-      aspect-ratio: 4/3;
-      user-select: none;
-      background: #1a1a2e; /* Fundo enquanto a imagem carrega */
+    .glow-effect {
+      box-shadow: 0 0 30px rgba(0, 212, 255, 0.3);
     }
-    .ba-before, .ba-after {
-      position: absolute;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      object-fit: contain; /* Alterado para 'contain' para mostrar a imagem inteira sem cortes */
-      pointer-events: none; /* Deixa os eventos para o container */
+
+    .glow-purple {
+      box-shadow: 0 0 30px rgba(168, 85, 247, 0.3);
     }
-    .ba-before { clip-path: inset(0 var(--clip-right, 50%) 0 0); z-index: 2; }
-    
-    .ba-slider-line {
-      position: absolute;
-      top: 0;
-      left: var(--slider-pos, 50%);
-      width: 3px;
-      height: 100%;
-      background: #fff;
-      z-index: 3;
-      transform: translateX(-50%);
-      pointer-events: none;
-      box-shadow: 0 0 10px rgba(0,0,0,0.5);
+
+    .glow-pink {
+      box-shadow: 0 0 30px rgba(236, 72, 153, 0.3);
     }
-    .ba-slider-handle {
-      position: absolute;
-      top: 50%;
-      left: var(--slider-pos, 50%);
-      transform: translate(-50%, -50%);
-      width: 44px; height: 44px;
-      background: #fff;
-      border-radius: 50%;
-      z-index: 4;
-      display: flex;
+
+    .check-icon::before {
+      content: '✓';
+      display: inline-flex;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
-      pointer-events: none;
-    }
-    .ba-label {
-      position: absolute;
-      top: 12px;
-      padding: 4px 12px;
-      border-radius: 999px;
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-      z-index: 5;
-      pointer-events: none;
-    }
-    .ba-label-before { left: 12px; background: rgba(0,0,0,0.6); color: #fff; backdrop-filter: blur(4px); }
-    .ba-label-after { right: 12px; background: rgba(255,255,255,0.9); color: #000; backdrop-filter: blur(4px); }
-
-    /* Fundo*/
-   background: radial-gradient(circle at top, #1e1b4b, #020617 70%);
-
-    /* Scrollbar */
-    .portfolio-wrap::-webkit-scrollbar { width: 6px; }
-    .portfolio-wrap::-webkit-scrollbar-track { background: #0a0a0a; }
-    .portfolio-wrap::-webkit-scrollbar-thumb { background: #333; border-radius: 3px; }
-
-    /* Estilo das Tags (Pills) */
-    .tag-pill {
-      background: rgba(139,92,246,0.12);
-      border: 1px solid rgba(139,92,246,0.25);
-      color: #c4b5fd;
-      padding: 4px 14px;
-      border-radius: 999px;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
       font-size: 12px;
-      font-weight: 500;
-      letter-spacing: 0.5px;
+      font-weight: 700;
+      margin-right: 12px;
+      flex-shrink: 0;
+      background: rgba(0, 212, 255, 0.2);
+      color: #00d4ff;
+    }
+
+    .stat-box { text-align: center; padding: 24px; }
+    .stat-number { font-size: 32px; font-weight: 800; color: #00d4ff; line-height: 1; }
+    .stat-label { font-size: 13px; color: rgba(255, 255, 255, 0.6); margin-top: 8px; text-transform: uppercase; letter-spacing: 0.5px; }
+
+    @media (max-width: 768px) {
+      .package-card.featured { transform: scale(1); }
     }
   </style>
+  <style>body { box-sizing: border-box; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
  </head>
-
-<body class="bg-[#0a0a0a] text-white">
-<div class="portfolio-wrap grain hero-gradient" id="app">
-
-<!-- HERO -->
-<section class="text-center py-20 px-6">
-  
-  <h1 class="text-4xl md:text-6xl font-bold mb-8">
-    Transformo imagens comuns em peças visuais mais profissionais e atrativas
-  </h1>
-  
-  <h1 class="text-3xl md:text-3xl font-bold mb-8">
-   Mais atenção. Mais valor percebido. Mais vendas.
-   </h1>
-
-  <p class="text-gray-400 max-w-2xl mx-auto mb-8">
-    Imagens criadas com inteligência artificial para destacar seu produto com mais qualidade e presença visual
-  </p>
-
-<!-- BOTÃO -->
-    <a href="#contato" 
-       class="cta-btn inline-flex items-center gap-2 px-8 py-4 rounded-full font-medium">
-       
-      Quero elevar o nível das minhas imagens
-      
-    </a>
-  
-</section>
-
-<!-- PORTFÓLIO - ANTES E DEPOIS -->
-   <section class="px-6 py-20" id="portfolio">
+ <body class="h-full scroll-smooth" style="background: #000000; color: #ffffff;">
+  <div id="app-wrapper" class="w-full h-full overflow-auto"><!-- NAV -->
+   <nav class="fixed top-0 left-0 right-0 z-40 backdrop-blur-2xl" style="background: rgba(10,0,20,0.95); border-bottom: 1px solid rgba(0,212,255,0.15);">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+     <div class="flex items-center gap-3">
+      <span id="nav-brand" class="text-lg font-bold heading" style="color: #00d4ff;">Simone Amigo</span>
+     </div>
+     <div class="flex items-center gap-4"><a href="#pacotes" class="hidden md:flex px-6 py-2.5 rounded-lg text-sm font-600 transition-all btn-primary" style="background: linear-gradient(135deg, #00d4ff 0%, #a855f7 100%); color: #0a0014;">Pacotes</a> <a href="#como-funciona" class="hidden md:flex px-6 py-2.5 rounded-lg text-sm font-600 transition-all btn-primary" style="background: linear-gradient(135deg, #a855f7 0%, #ec4899 100%); color: #ffffff;">Serviços</a>
+     </div>
+    </div>
+   </nav><!-- HERO -->
+   <header class="relative pt-40 pb-24 px-6 overflow-hidden" style="min-height: 95%;">
+    <div class="absolute inset-0 overflow-hidden pointer-events-none">
+     <div class="absolute top-20 right-10 w-72 h-72 rounded-full" style="background: radial-gradient(circle, rgba(0,212,255,0.2) 0%, transparent 70%); filter: blur(60px);"></div>
+     <div class="absolute bottom-10 left-10 w-96 h-96 rounded-full" style="background: radial-gradient(circle, rgba(168,85,247,0.15) 0%, transparent 70%); filter: blur(60px);"></div>
+     <div class="absolute top-1/2 right-1/4 w-80 h-80 rounded-full" style="background: radial-gradient(circle, rgba(236,72,153,0.12) 0%, transparent 70%); filter: blur(60px);"></div>
+    </div>
+    <div class="max-w-5xl mx-auto text-center relative z-10">
+     <div class="fade-up inline-flex items-center gap-2 mb-8 px-4 py-2 rounded-full" style="background: rgba(0,212,255,0.08); border: 1px solid rgba(0,212,255,0.15);"><span class="inline-block w-2 h-2 rounded-full" style="background: #00d4ff;"></span> <span class="text-xs font-600 tracking-wide" style="color: #00d4ff;">Estrutura digital com IA</span>
+     </div>
+     <h1 id="hero-title" class="fade-up delay-1 text-5xl sm:text-6xl md:text-7xl font-extrabold leading-tight mb-8 heading" style="color: #ffffff; letter-spacing: -1px;">Sua empresa<br><span class="gradient-neon">pronta para o digital</span></h1>
+     <p id="hero-subtitle" class="fade-up delay-2 text-lg sm:text-xl max-w-3xl mx-auto mb-12" style="color: rgba(255,255,255,0.65); line-height: 1.8; font-weight: 400;">Monto toda a base visual e digital que seu negócio precisa para começar a aparecer online. Site profissional, logo impactante e artes para redes sociais — tudo com inteligência artificial como ferramenta de criação.</p>
+     <div class="fade-up delay-3 flex flex-col sm:flex-row gap-4 justify-center"><a id="hero-cta" href="#pacotes" class="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-lg text-base font-600 btn-primary glow-effect" style="background: linear-gradient(135deg, #00d4ff 0%, #a855f7 100%); color: #0a0014;"> <span>Começar agora</span> <i data-lucide="arrow-right" style="width:18px;height:18px;"></i> </a> <a href="#como-funciona" class="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-lg text-base font-600 transition-all glow-purple" style="color: rgba(255,255,255,0.8); border: 1px solid rgba(168,85,247,0.4); background: rgba(168,85,247,0.1);"> Como funciona </a>
+     </div>
+    </div>
+   </header><!-- TRANSPARÊNCIA -->
+   <section class="py-16 px-6 fade-up delay-5">
+    <div class="max-w-3xl mx-auto text-center">
+     <div class="inline-flex items-center gap-2 mb-6" style="color: #00d4ff;"><i data-lucide="shield-check" style="width:20px;height:20px;"></i> <span class="text-xs font-bold uppercase tracking-widest">Transparência total</span>
+     </div>
+     <p class="text-base sm:text-lg leading-relaxed" style="color: rgba(255,255,255,0.75);">Utilizo <strong style="color: #ffffff;">inteligência artificial como ferramenta de criação</strong> — isso me permite entregar materiais de qualidade com agilidade e custos acessíveis. Cada projeto é revisado e personalizado para o seu negócio. Sem promessas exageradas: entrego o que faço bem, com honestidade.</p>
+    </div>
+   </section><!-- SERVIÇOS -->
+   <section id="como-funciona" class="py-24 px-6">
     <div class="max-w-6xl mx-auto">
-     <div class="mono text-violet-400 text-xs tracking-[4px] uppercase mb-3">Portfólio</div>
-     <h2 class="text-3xl md:text-4xl font-800 text-white mb-4">Antes &amp; Depois</h2>
-     <p class="text-gray-500 mb-16 text-lg">Arraste o slider para comparar os resultados</p>
-     <div class="grid md:grid-cols-2 gap-8" id="projectGrid">
-      
-      <!-- Projeto 1 (Com as imagens do perfume) -->
-      <div class="project-card rounded-2xl overflow-hidden bg-[#111115] border border-gray-800/50">
-       <div class="ba-container" style="--slider-pos:50%;--clip-right:50%;">
-        <!-- IMAGEM DE DEPOIS (Modelo gerada por IA) -->
-        <img class="ba-after" src="https://i.ibb.co/PZ4xpP1D/Gemini-Generated-Image-1dl2wb1dl2wb1dl2-processed-lightpdf-com.png" alt="Gemini Generated Image 1dl2wb1dl2wb1dl2 processed(lightpdf com)" border="0" alt="Produto Premium - Depois">
-        <!-- IMAGEM DE ANTES (A fotografia original) -->
-        <img class="ba-before" src="https://i.ibb.co/kVDJYYjS/Gemini-Generated-Image-8up4yy8up4yy8up4-processed-lightpdf-com.png" alt="Gemini Generated Image 8up4yy8up4yy8up4 processed(lightpdf com)" border="0" alt="Antes">
-        <div class="ba-slider-line"></div>
-        <div class="ba-slider-handle">
-         <svg width="20" height="20" viewbox="0 0 20 20" fill="none"><path d="M6 10L2 10M2 10L5 7M2 10L5 13M14 10L18 10M18 10L15 7M18 10L15 13" stroke="#333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /></svg>
-        </div>
-        <div class="ba-label ba-label-before">Antes</div><div class="ba-label ba-label-after">Depois</div>
+     <div class="text-center mb-20"><span class="text-xs font-bold tracking-widest uppercase gradient-neon">O que você recebe</span>
+      <h2 class="text-4xl sm:text-5xl font-extrabold mt-4 heading mb-6" style="color: #ffffff;">Três pilares para seu<br><span class="gradient-neon">negócio digital</span></h2>
+      <p class="max-w-xl mx-auto" style="color: rgba(255,255,255,0.6);">Tudo que você precisa para começar a gerar resultados online</p>
+     </div>
+     <div class="grid md:grid-cols-3 gap-8">
+      <div class="card-hover rounded-2xl p-8 glow-effect" style="background: linear-gradient(135deg, rgba(0,212,255,0.1) 0%, rgba(0,212,255,0.05) 100%); border: 1px solid rgba(0,212,255,0.2);">
+       <div class="w-14 h-14 rounded-xl flex items-center justify-center mb-6 glow-effect" style="background: linear-gradient(135deg, rgba(0,212,255,0.3) 0%, rgba(0,212,255,0.15) 100%);">
+        <i data-lucide="globe" style="width:28px;height:28px;color:#00d4ff;"></i>
        </div>
-       <div class="p-5">
-        <div class="flex gap-2 mb-3"><span class="tag-pill">Produto</span><span class="tag-pill">Publicidade</span></div>
-        <h3 class="text-white font-700 text-lg mb-1">Produto Cosmético Premium</h3>
-        <p class="text-gray-500 text-sm">Fotografia amadora transformada em imagem publicitária profissional com modelo gerada por IA</p>
+       <h3 class="text-xl font-bold mb-3 heading" style="color: #ffffff;">Site Profissional</h3>
+       <p class="text-sm leading-relaxed mb-6" style="color: rgba(255,255,255,0.6);">Página responsiva e moderna para apresentar seu negócio, serviços e contato. Funciona perfeitamente em celular e computador.</p>
+       <ul class="space-y-3 text-sm" style="color: rgba(255,255,255,0.65);">
+        <li class="flex items-center gap-2"><span class="check-icon"></span> Design personalizado</li>
+        <li class="flex items-center gap-2"><span class="check-icon"></span> Responsivo (mobile-first)</li>
+        <li class="flex items-center gap-2"><span class="check-icon"></span> Botão direto pro WhatsApp</li>
+       </ul>
+      </div>
+      <div class="card-hover rounded-2xl p-8 glow-purple" style="background: linear-gradient(135deg, rgba(168,85,247,0.1) 0%, rgba(168,85,247,0.05) 100%); border: 1px solid rgba(168,85,247,0.2);">
+       <div class="w-14 h-14 rounded-xl flex items-center justify-center mb-6 glow-purple" style="background: linear-gradient(135deg, rgba(168,85,247,0.3) 0%, rgba(168,85,247,0.15) 100%);">
+        <i data-lucide="palette" style="width:28px;height:28px;color:#a855f7;"></i>
+       </div>
+       <h3 class="text-xl font-bold mb-3 heading" style="color: #ffffff;">Logo &amp; Identidade</h3>
+       <p class="text-sm leading-relaxed mb-6" style="color: rgba(255,255,255,0.6);">Uma marca visual que transmite profissionalismo desde o primeiro contato. Criada com auxílio de IA e refinada para o seu nicho.</p>
+       <ul class="space-y-3 text-sm" style="color: rgba(255,255,255,0.65);">
+        <li class="flex items-center gap-2"><span class="check-icon"></span> Logo principal + variações</li>
+        <li class="flex items-center gap-2"><span class="check-icon"></span> Paleta de cores definida</li>
+        <li class="flex items-center gap-2"><span class="check-icon"></span> Arquivos em alta resolução</li>
+       </ul>
+      </div>
+      <div class="card-hover rounded-2xl p-8 glow-pink" style="background: linear-gradient(135deg, rgba(236,72,153,0.1) 0%, rgba(236,72,153,0.05) 100%); border: 1px solid rgba(236,72,153,0.2);">
+       <div class="w-14 h-14 rounded-xl flex items-center justify-center mb-6 glow-pink" style="background: linear-gradient(135deg, rgba(236,72,153,0.3) 0%, rgba(236,72,153,0.15) 100%);">
+        <i data-lucide="layout-grid" style="width:28px;height:28px;color:#ec4899;"></i>
+       </div>
+       <h3 class="text-xl font-bold mb-3 heading" style="color: #ffffff;">Artes para Redes</h3>
+       <p class="text-sm leading-relaxed mb-6" style="color: rgba(255,255,255,0.6);">Pack de artes prontas para você já começar a postar com visual profissional no Instagram, Facebook ou onde preferir.</p>
+       <ul class="space-y-3 text-sm" style="color: rgba(255,255,255,0.65);">
+        <li class="flex items-center gap-2"><span class="check-icon"></span> Posts para feed e stories</li>
+        <li class="flex items-center gap-2"><span class="check-icon"></span> Templates editáveis</li>
+        <li class="flex items-center gap-2"><span class="check-icon"></span> Visual alinhado à marca</li>
+       </ul>
+      </div>
+     </div>
+    </div>
+   </section><!-- PACOTES -->
+   <section id="pacotes" class="py-24 px-6">
+    <div class="max-w-7xl mx-auto">
+     <div class="text-center mb-20"><span class="text-xs font-bold tracking-widest uppercase gradient-neon">Escolha seu caminho</span>
+      <h2 class="text-4xl sm:text-5xl font-extrabold mt-4 heading mb-6" style="color: #ffffff;">Pacotes que crescem<br><span class="gradient-neon">com seu negócio</span></h2>
+      <p class="max-w-xl mx-auto" style="color: rgba(255,255,255,0.6);">Escolha o que faz sentido pro momento do seu negócio</p>
+     </div>
+     <div class="grid md:grid-cols-3 gap-8"><!-- Essencial -->
+      <div class="package-card rounded-2xl p-8 flex flex-col glow-effect" style="background: linear-gradient(135deg, rgba(0,212,255,0.1) 0%, rgba(0,212,255,0.05) 100%); border: 1px solid rgba(0,212,255,0.2);">
+       <div class="mb-8">
+        <span class="text-xs font-bold uppercase tracking-widest" style="color: #00d4ff;">Essencial</span>
+        <div class="mt-4 flex items-baseline gap-2">
+         <span class="text-5xl font-extrabold heading" style="color: #ffffff;">R$497</span>
+        </div>
+        <p class="text-sm mt-3" style="color: rgba(255,255,255,0.5);">Pagamento único</p>
+       </div>
+       <div class="space-y-4 mb-10 flex-1">
+        <div class="flex items-center text-sm" style="color: rgba(255,255,255,0.7);">
+         <span class="check-icon"></span>Logo com 2 variações
+        </div>
+        <div class="flex items-center text-sm" style="color: rgba(255,255,255,0.7);">
+         <span class="check-icon"></span>Paleta de cores + tipografia
+        </div>
+        <div class="flex items-center text-sm" style="color: rgba(255,255,255,0.7);">
+         <span class="check-icon"></span>5 artes para redes sociais
+        </div>
+        <div class="flex items-center text-sm" style="color: rgba(255,255,255,0.7);">
+         <span class="check-icon"></span>1 revisão
+        </div>
+        <div class="flex items-center text-sm" style="color: rgba(255,255,255,0.7);">
+         <span class="check-icon"></span>Entrega em até 5 dias úteis
+        </div>
+       </div><button onclick="openWhatsAppPackage('Essencial', 'R$497')" class="block text-center py-3.5 rounded-lg font-semibold text-sm transition-all border" style="color: #00d4ff; border-color: rgba(0,212,255,0.3); background: rgba(0,212,255,0.05); width: 100%; cursor: pointer; border: 1px solid rgba(0,212,255,0.2);">Escolher Essencial</button>
+      </div><!-- Profissional -->
+      <div class="package-card featured rounded-2xl p-8 flex flex-col relative glow-purple" style="background: linear-gradient(135deg, rgba(168,85,247,0.1) 0%, rgba(168,85,247,0.05) 100%); border: 2px solid rgba(168,85,247,0.3);">
+       <div class="absolute -top-4 right-8 inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold" style="background: #a855f7; color: #0a0a0f;"><i data-lucide="zap" style="width:14px;height:14px;"></i> Mais escolhido
+       </div>
+       <div class="mb-8">
+        <span class="text-xs font-bold uppercase tracking-widest" style="color: #a855f7;">Profissional</span>
+        <div class="mt-4 flex items-baseline gap-2">
+         <span class="text-5xl font-extrabold heading" style="color: #ffffff;">R$897</span>
+        </div>
+        <p class="text-sm mt-3" style="color: rgba(255,255,255,0.5);">Pagamento único</p>
+       </div>
+       <div class="space-y-4 mb-10 flex-1">
+        <div class="flex items-center text-sm" style="color: rgba(255,255,255,0.7);">
+         <span class="check-icon"></span>Tudo do Essencial +
+        </div>
+        <div class="flex items-center text-sm" style="color: rgba(255,255,255,0.7);">
+         <span class="check-icon"></span>Site de uma página (landing page)
+        </div>
+        <div class="flex items-center text-sm" style="color: rgba(255,255,255,0.7);">
+         <span class="check-icon"></span>10 artes para redes sociais
+        </div>
+        <div class="flex items-center text-sm" style="color: rgba(255,255,255,0.7);">
+         <span class="check-icon"></span>Capa para redes sociais
+        </div>
+        <div class="flex items-center text-sm" style="color: rgba(255,255,255,0.7);">
+         <span class="check-icon"></span>1 revisão
+        </div>
+        <div class="flex items-center text-sm" style="color: rgba(255,255,255,0.7);">
+         <span class="check-icon"></span>Entrega em até 7 dias úteis
+        </div>
+       </div><button onclick="openWhatsAppPackage('Profissional', 'R$897')" class="block text-center py-3.5 rounded-lg font-bold text-sm transition-all" style="background: #a855f7; color: #0a0a0f; width: 100%; cursor: pointer; border: none;">Escolher Profissional</button>
+      </div><!-- Completo -->
+      <div class="package-card rounded-2xl p-8 flex flex-col glow-pink" style="background: linear-gradient(135deg, rgba(236,72,153,0.1) 0%, rgba(236,72,153,0.05) 100%); border: 1px solid rgba(236,72,153,0.2);">
+       <div class="mb-8">
+        <span class="text-xs font-bold uppercase tracking-widest" style="color: #ec4899;">Completo</span>
+        <div class="mt-4 flex items-baseline gap-2">
+         <span class="text-5xl font-extrabold heading" style="color: #ffffff;">R$1.397</span>
+        </div>
+        <p class="text-sm mt-3" style="color: rgba(255,255,255,0.5);">Pagamento único</p>
+       </div>
+       <div class="space-y-4 mb-10 flex-1">
+        <div class="flex items-center text-sm" style="color: rgba(255,255,255,0.7);">
+         <span class="check-icon"></span>Tudo do Profissional +
+        </div>
+        <div class="flex items-center text-sm" style="color: rgba(255,255,255,0.7);">
+         <span class="check-icon"></span>Site com até 3 páginas
+        </div>
+        <div class="flex items-center text-sm" style="color: rgba(255,255,255,0.7);">
+         <span class="check-icon"></span>20 artes para redes sociais
+        </div>
+        <div class="flex items-center text-sm" style="color: rgba(255,255,255,0.7);">
+         <span class="check-icon"></span>Cartão de visita digital
+        </div>
+        <div class="flex items-center text-sm" style="color: rgba(255,255,255,0.7);">
+         <span class="check-icon"></span>Até 5 revisões
+        </div>
+        <div class="flex items-center text-sm" style="color: rgba(255,255,255,0.7);">
+         <span class="check-icon"></span>Entrega em até 10 dias úteis
+        </div>
+       </div><button onclick="openWhatsAppPackage('Completo', 'R$1.397')" class="block text-center py-3.5 rounded-lg font-semibold text-sm transition-all border" style="color: #ec4899; border-color: rgba(236,72,153,0.3); background: rgba(236,72,153,0.05); width: 100%; cursor: pointer; border: 1px solid rgba(236,72,153,0.2);">Escolher Completo</button>
+      </div>
+     </div>
+    </div>
+   </section><!-- PROCESSO -->
+   <section class="py-24 px-6">
+    <div class="max-w-4xl mx-auto">
+     <div class="text-center mb-20"><span class="text-xs font-bold tracking-widest uppercase gradient-neon">Do zero ao pronto</span>
+      <h2 class="text-4xl sm:text-5xl font-extrabold mt-4 heading mb-6" style="color: #ffffff;">Como é o <span class="gradient-text">processo</span></h2>
+     </div>
+     <div class="grid sm:grid-cols-2 gap-8">
+      <div class="flex gap-6">
+       <div class="w-12 h-12 rounded-full flex items-center justify-center flex-shrink-0 font-bold heading" style="background: rgba(0,212,255,0.15); color: #00d4ff;">
+        1
+       </div>
+       <div>
+        <h4 class="font-bold mb-3 heading" style="color: #ffffff;">Proposta e pagamento</h4>
+        <ul class="space-y-2 text-sm" style="color: rgba(255,255,255,0.65);">
+         <li class="flex items-start gap-2"><span style="color: #00d4ff; margin-top: 2px;">→</span> <span>Você escolhe o pacote ideal</span></li>
+         <li class="flex items-start gap-2"><span style="color: #00d4ff; margin-top: 2px;">→</span> <span><strong style="color: #ffffff;">Essencial e Profissional:</strong> 100% à vista</span></li>
+         <li class="flex items-start gap-2"><span style="color: #00d4ff; margin-top: 2px;">→</span> <span><strong style="color: #ffffff;">Completo:</strong> 50% agora, 50% na entrega</span></li>
+        </ul>
        </div>
       </div>
-
-      <!-- Projeto 2 -->
-      <div class="project-card rounded-2xl overflow-hidden bg-[#111115] border border-gray-800/50">
-       <div class="ba-container" style="--slider-pos:50%;--clip-right:50%;">
-        <!-- IMAGEM DE DEPOIS (Modelo gerada por IA) -->
-        <img class="ba-after" src="https://i.ibb.co/4Z9nCJyh/Gemini-Generated-Image-jxu59tjxu59tjxu5-processed-lightpdf-com.png" alt="Gemini Generated Image jxu59tjxu59tjxu5 processed(lightpdf com)" border="0" alt="Produto Premium - Depois">
-        <!-- IMAGEM DE ANTES (A fotografia original) -->
-        <img class="ba-before" src="https://i.ibb.co/7NW53Nmt/Gemini-Generated-Image-n1n6dgn1n6dgn1n6-processed-lightpdf-com.png" alt="Gemini Generated Image n1n6dgn1n6dgn1n6 processed(lightpdf com)" border="0" alt="Antes">
-        <div class="ba-slider-line"></div>
-        <div class="ba-slider-handle">
-         <svg width="20" height="20" viewbox="0 0 20 20" fill="none"><path d="M6 10L2 10M2 10L5 7M2 10L5 13M14 10L18 10M18 10L15 7M18 10L15 13" stroke="#333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /></svg>
-        </div>
-        <div class="ba-label ba-label-before">Antes</div><div class="ba-label ba-label-after">Depois</div>
+      <div class="flex gap-6">
+       <div class="w-12 h-12 rounded-full flex items-center justify-center flex-shrink-0 font-bold heading" style="background: rgba(0,212,255,0.15); color: #00d4ff;">
+        2
        </div>
-       <div class="p-5">
-        <div class="flex gap-2 mb-3"><span class="tag-pill">Food</span><span class="tag-pill">Branding</span></div>
-        <h3 class="text-white font-700 text-lg mb-1">Restaurante &amp; Gastronomia</h3>
-        <p class="text-gray-500 text-sm">Fotografia gastronomica elevada com IA para ementa digital</p>
+       <div>
+        <h4 class="font-bold mb-3 heading" style="color: #ffffff;">Primeira conversa</h4>
+        <ul class="space-y-2 text-sm" style="color: rgba(255,255,255,0.65);">
+         <li class="flex items-start gap-2"><span style="color: #00d4ff; margin-top: 2px;">→</span> <span>Você me conta sobre seu negócio</span></li>
+         <li class="flex items-start gap-2"><span style="color: #00d4ff; margin-top: 2px;">→</span> <span>Explica seu público-alvo e objetivos</span></li>
+         <li class="flex items-start gap-2"><span style="color: #00d4ff; margin-top: 2px;">→</span> <span>Entendo exatamente o que você precisa</span></li>
+        </ul>
        </div>
       </div>
-
-      <!-- Projeto 3 -->
-      <div class="project-card rounded-2xl overflow-hidden bg-[#111115] border border-gray-800/50">
-       <div class="ba-container" style="--slider-pos:50%;--clip-right:50%;">
-        <!-- IMAGEM DE DEPOIS (Modelo gerada por IA) -->
-        <img class="ba-after" src="https://i.ibb.co/pv0sHPmd/Chat-GPT-Image-22-de-abr-de-2026-16-16-35.png" alt="Chat GPT Image 22 de abr de 2026 16 16 35" border="0" alt="Produto Premium - Depois">
-        <!-- IMAGEM DE ANTES (A fotografia original) -->
-        <img class="ba-before" src="https://i.ibb.co/7J8k4S2T/Chat-GPT-Image-22-de-abr-de-2026-16-12-25.png" alt="Chat GPT Image 22 de abr de 2026 16 12 25" border="0" alt="Antes">
-        <div class="ba-slider-line"></div>
-        <div class="ba-slider-handle">
-         <svg width="20" height="20" viewbox="0 0 20 20" fill="none"><path d="M6 10L2 10M2 10L5 7M2 10L5 13M14 10L18 10M18 10L15 7M18 10L15 13" stroke="#333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /></svg>
-        </div>
-        <div class="ba-label ba-label-before">Antes</div><div class="ba-label ba-label-after">Depois</div>
+      <div class="flex gap-6">
+       <div class="w-12 h-12 rounded-full flex items-center justify-center flex-shrink-0 font-bold heading" style="background: rgba(0,212,255,0.15); color: #00d4ff;">
+        3
        </div>
-       <div class="p-5">
-        <div class="flex gap-2 mb-3"><span class="tag-pill">E-commerce</span><span class="tag-pill">Moda</span></div>
-        <h3 class="text-white font-700 text-lg mb-1">Moda &amp; E-commerce</h3>
-        <p class="text-gray-500 text-sm">Criação de modelo e cenário virtual para catálogo de moda</p>
+       <div>
+        <h4 class="font-bold mb-3 heading" style="color: #ffffff;">Criação e revisão</h4>
+        <ul class="space-y-2 text-sm" style="color: rgba(255,255,255,0.65);">
+         <li class="flex items-start gap-2"><span style="color: #00d4ff; margin-top: 2px;">→</span> <span>Desenvolvimento com IA como ferramenta</span></li>
+         <li class="flex items-start gap-2"><span style="color: #00d4ff; margin-top: 2px;">→</span> <span>Prazo começa após primeira conversa</span></li>
+         <li class="flex items-start gap-2"><span style="color: #00d4ff; margin-top: 2px;">→</span> <span><strong style="color: #ffffff;">Essencial:</strong> 5 dias úteis + 1 revisão</span></li>
+         <li class="flex items-start gap-2"><span style="color: #00d4ff; margin-top: 2px;">→</span> <span><strong style="color: #ffffff;">Profissional:</strong> 7 dias úteis + 1 revisão</span></li>
+         <li class="flex items-start gap-2"><span style="color: #00d4ff; margin-top: 2px;">→</span> <span><strong style="color: #ffffff;">Completo:</strong> 10 dias úteis + 5 revisões</span></li>
+        </ul>
        </div>
       </div>
-
-      <!-- Projeto 4 -->
-      <div class="project-card rounded-2xl overflow-hidden bg-[#111115] border border-gray-800/50">
-       <div class="ba-container" style="--slider-pos:50%;--clip-right:50%;">
-        <!-- IMAGEM DE DEPOIS (Modelo gerada por IA) -->
-        <img class="ba-after" src="https://i.ibb.co/NnfyP976/Chat-GPT-Image-22-de-abr-de-2026-16-33-52.png" alt="Chat GPT Image 22 de abr de 2026 16 33 52" border="0" alt="Produto Premium - Depois">
-        <!-- IMAGEM DE ANTES (A fotografia original) -->
-        <img class="ba-before" src="https://i.ibb.co/pBMNMg2m/Chat-GPT-Image-22-de-abr-de-2026-16-31-12.png" alt="Chat GPT Image 22 de abr de 2026 16 31 12" border="0" alt="Antes">
-        <div class="ba-slider-line"></div>
-        <div class="ba-slider-handle">
-         <svg width="20" height="20" viewbox="0 0 20 20" fill="none"><path d="M6 10L2 10M2 10L5 7M2 10L5 13M14 10L18 10M18 10L15 7M18 10L15 13" stroke="#333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /></svg>
-        </div>
-        <div class="ba-label ba-label-before">Antes</div><div class="ba-label ba-label-after">Depois</div>
+      <div class="flex gap-6">
+       <div class="w-12 h-12 rounded-full flex items-center justify-center flex-shrink-0 font-bold heading" style="background: rgba(0,212,255,0.15); color: #00d4ff;">
+        4
        </div>
-       <div class="p-5">
-        <div class="flex gap-2 mb-3"><span class="tag-pill">Imobiliário</span><span class="tag-pill">Virtual Staging</span></div>
-        <h3 class="text-white font-700 text-lg mb-1">Imobiliária Virtual</h3>
-        <p class="text-gray-500 text-sm">Virtual staging: espaços vazios transformados em decorados</p>
+       <div>
+        <h4 class="font-bold mb-3 heading" style="color: #ffffff;">Entrega</h4>
+        <ul class="space-y-2 text-sm" style="color: rgba(255,255,255,0.65);">
+         <li class="flex items-start gap-2"><span style="color: #00d4ff; margin-top: 2px;">→</span> <span>Tudo entregue organizado e pronto</span></li>
+         <li class="flex items-start gap-2"><span style="color: #00d4ff; margin-top: 2px;">→</span> <span>Arquivos em alta resolução</span></li>
+         <li class="flex items-start gap-2"><span style="color: #00d4ff; margin-top: 2px;">→</span> <span>Pronto para você usar imediatamente</span></li>
+        </ul>
        </div>
       </div>
      </div>
     </div>
-   </section>
-
-<!-- CTA -->
-<section class="py-20 px-6 relative overflow-hidden">
-
-  <!-- FUNDO GRADIENTE SUAVE -->
-  
-  <div class="relative max-w-3xl mx-auto text-center">
-
-    <h2 class="text-3xl md:text-4xl font-semibold mb-4 leading-tight">
-      Quer melhorar a apresentação das suas imagens?
-    </h2>
-
-    <p class="text-gray-400 mb-8">
-      O próximo passo é simples
-    </p>
-
-    <!-- BOTÃO -->
-    <a href="#contato" 
-       class="cta-btn inline-flex items-center gap-2 px-8 py-4 rounded-full font-medium">
-       
-      Solicitar Orçamento
-      
-    </a>
-
-  </div>
-
-</section>
-
-<!-- VÍDEO -->
-<section class="text-center px-6 py-20">
-  <h2 class="text-3xl mb-6">⚡ Veja na prática, em menos de 10 segundos, o impacto dessa transformação ⚡</h2>
-
-  <div class="flex justify-center">
-    <div style="width:80%;">
-      <div style="padding:56.25% 0 0 0;position:relative;">
-        <iframe 
-          src="https://player.vimeo.com/video/1185645090?autoplay=1&loop=1&muted=1"
-          style="position:absolute;top:0;left:0;width:100%;height:100%;"
-          frameborder="0"
-          allow="autoplay; fullscreen"
-        ></iframe>
-      </div>
+   </section><!-- FAQ -->
+   <section class="py-24 px-6">
+    <div class="max-w-3xl mx-auto">
+     <div class="text-center mb-16"><span class="text-xs font-bold tracking-widest uppercase gradient-neon">Dúvidas</span>
+      <h2 class="text-4xl sm:text-5xl font-extrabold mt-4 heading mb-6" style="color: #ffffff;">Perguntas <span class="gradient-text">frequentes</span></h2>
+     </div>
+     <div id="faq-container" class="space-y-3"></div>
     </div>
-  </div>
-
-  <p class="text-gray-400 mt-6 max-w-xl mx-auto">
-    De imagens simples para visuais que chamam atenção, geram desejo e aumentam o valor percebido do seu produto.
-  </p>
-</section>
-
-<!-- BENEFÍCIOS -->
-<section class="py-24 px-6">
-  <div class="max-w-4xl mx-auto text-center">
-
-    <p class="text-sm text-violet-400 mb-3 tracking-widest uppercase">
-      Mais do que estética
-    </p>
-
-    <h2 class="text-3xl md:text-4xl font-semibold mb-6">
-      Por que usar inteligência artificial nas suas imagens?
-    </h2>
-
-    <p class="text-gray-400 mb-4">
-     Uma forma mais eficiente de apresentar seu produto
-    </p>
-
-    <p class="text-gray-500 text-sm mb-6">
-    Com mais qualidade visual e consistência, sem depender de produções complexas
-    </p>
-
-    <!-- CARDS -->
-    <div class="grid md:grid-cols-2 gap-3 text-left">
-
-<div class="card-beneficio">
-  <span class="icon">✦</span>
-  <div>
-    <p class="titulo">Qualidade visual</p>
-    <p class="desc">Acabamento mais refinado</p>
-  </div>
-</div>      
-
-      <div class="card-beneficio">
-  <span class="icon">✦</span>
-  <div>
-    <p class="titulo">Consistência visual</p>
-    <p class="desc">Identidade mais alinhada entre as imagens</p>
-  </div>
-</div>  
-
-      <div class="card-beneficio">
-  <span class="icon">✦</span>
-  <div>
-    <p class="titulo">Apresentação refinada</p>
-    <p class="desc">Valorização mais sutil do produto</p>
-  </div>
-</div>  
-
-      <div class="card-beneficio">
-  <span class="icon">✦</span>
-  <div>
-    <p class="titulo">Versatilidade de aplicação</p>
-    <p class="desc">Flexibilidade para diferentes formatos</p>
-  </div>
-</div>  
-
+   </section><!-- CTA / CONTATO -->
+   <section id="contato" class="py-24 px-6 relative overflow-hidden">
+    <div class="absolute inset-0 overflow-hidden pointer-events-none">
+     <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 rounded-full" style="background: radial-gradient(circle, rgba(0,212,255,0.1) 0%, transparent 70%); filter: blur(60px);"></div>
     </div>
-
+    <div class="max-w-2xl mx-auto text-center relative z-10">
+     <h2 class="text-4xl sm:text-5xl font-extrabold mb-6 heading" style="color: #ffffff;">Ficou com <span style="color: #00d4ff;">dúvidas</span>?</h2>
+     <p class="mb-12 text-lg" style="color: rgba(255,255,255,0.6);">Quer saber mais antes de escolher? Me envie um e-mail e vou responder com prazer!</p>
+     <div class="flex justify-center">
+      <a id="email-contact" href="mailto:simonesanttos25@outlook.com" class="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-lg text-base font-semibold transition-all btn-primary" style="background: linear-gradient(135deg, #00d4ff 0%, #a855f7 100%); color: #0a0014;"> <i data-lucide="mail" style="width:18px;height:18px;"></i> <span>Enviar e-mail</span> </a>
+     </div>
+    </div>
+   </section><!-- FOOTER -->
+   <footer class="py-12 px-6 text-center">
+    <p id="footer-text" class="text-xs" style="color: rgba(255,255,255,0.4);">© 2025 Simone Amigo · Estrutura digital com inteligência artificial</p>
+   </footer>
   </div>
-
-</section>
-
-
-<!-- CONTATO -->
-
-   <section class="px-6 py-20" id="contato">
-    <div class="max-w-2xl mx-auto text-center">
-     <h2 class="text-3xl md:text-4xl font-800 text-white mb-6">Vamos criar algo <span class="bg-gradient-to-r from-violet-400 to-cyan-400 bg-clip-text text-transparent">incrível</span>?</h2>
-     <p class="text-gray-400">Se você chegou até aqui, provavelmente precisa melhorar suas imagens.</p>
-     <p class="text-gray-400 mb-10">Entre em contato e vamos transformar as suas ideias em realidade.</p>
-
-  <!-- FORMULÁRIO FUNCIONANDO -->
-
-  <form id="formContato" class="space-y-2">
-
-  <input type="text" name="nome" placeholder="Seu nome" required 
-    class="w-full p-4 rounded-lg bg-white/5 border border-gray-700 focus:border-violet-500 outline-none">
-
-  <input type="email" name="email" placeholder="Seu e-mail" required 
-    class="w-full p-4 rounded-lg bg-white/5 border border-gray-700 focus:border-violet-500 outline-none">
-
-  <textarea name="mensagem" placeholder="Sua mensagem" required 
-    class="w-full p-4 rounded-lg bg-white/5 border border-gray-700 focus:border-violet-500 outline-none"></textarea>
-
-  <button id="btnEnviar" type="submit"
-    class="w-full bg-violet-600 hover:bg-violet-500 py-4 rounded-xl transition-all duration-300 flex justify-center items-center gap-2">
-
-    <span id="btnTexto">Enviar Mensagem</span>
-
-    <!-- loading -->
-    <svg id="loadingIcon" class="hidden animate-spin" width="20" height="20" viewBox="0 0 24 24">
-      <circle cx="12" cy="12" r="10" stroke="white" stroke-width="3" fill="none"/>
-    </svg>
-
-  </button>
-
-</form>
-
-<!-- mensagem -->
-<p id="msgSucesso" class="text-green-400 mt-4 hidden text-center">
-  ✅ Mensagem enviada com sucesso!
-</p>
-
-<p id="msgErro" class="text-red-400 mt-4 hidden text-center">
-  ❌ Erro ao enviar. Tente novamente.
-</p>
-
-  </section>
-
-<!-- RODAPÉ -->
-<footer class="text-center py-10 px-6">
-
-  <!-- BOTÃO INSTAGRAM -->
-  <div class="flex justify-center mb-6">
-    
-    <a href="https://www.instagram.com/simoneamigo_/" 
-       target="_blank"
-       rel="noopener noreferrer"
-       class="insta-btn flex items-center gap-3 px-6 py-3 rounded-full">
-
-      <i data-lucide="instagram" style="width:22px;height:22px;"></i>
-      <span>Ver mais no Instagram</span>
-
-    </a>
-
-  </div>
-
-  <!-- TEXTO -->
-  <div class="max-w-5xl mx-auto">
-    <p class="text-gray-600">
-      © 2026 Estúdio de IA Criativo. Todos os direitos reservados.
-    </p>
-  </div>
-
-</footer>
-
   <script>
-// === DADOS DOS SERVIÇOS ===
-const services = [
-  { icon: "image", title: "Fotografias de Produto", desc: "Transformo fotografias simples em imagens publicitárias profissionais com cenários e iluminação perfeitos." },
-  { icon: "palette", title: "Identidade Visual", desc: "Criação de logótipos, paletas de cores e materiais de branding únicos utilizando IA generativa." },
-  { icon: "home", title: "Virtual Staging", desc: "Espaços vazios ganham vida com decoração virtual fotorrealista para o mercado imobiliário." },
-  { icon: "refresh-cw", title: "Restauro de Fotografias", desc: "Fotografias antigas, danificadas ou a preto e branco são restauradas, colorizadas e ganham nova vida." },
-  { icon: "video", title: "Vídeo com IA", desc: "Animações e vídeos curtos criados com ferramentas de IA para redes sociais e anúncios." },
-  { icon: "wand-2", title: "Edição Avançada", desc: "Remoção de fundo, troca de cenários, correção facial e muito mais com precisão de IA." }
-];
+    const defaultConfig = {
+      hero_title: 'Sua empresa pronta para o digital',
+      hero_subtitle: 'Monto toda a base visual e digital que seu negócio precisa para começar a aparecer online. Site profissional, logo impactante e artes para redes sociais — tudo com inteligência artificial como ferramenta de criação.',
+      brand_name: 'Simone Amigo',
+      whatsapp_number: '5585988059532',
+      email_address: 'simonesanttos25@outlook.com',
+      cta_text: 'Começar agora'
+    };
 
-// === FUNÇÃO DO SLIDER ===
-function setupSlider(container) {
-  let active = false;
-  
-  const move = (clientX) => {
-    const rect = container.getBoundingClientRect();
-    let pct = ((clientX - rect.left) / rect.width) * 100;
-    pct = Math.max(0, Math.min(100, pct)); // Trava o limite entre 0 e 100
-    
-    container.style.setProperty('--slider-pos', pct + '%');
-    container.style.setProperty('--clip-right', (100 - pct) + '%');
-  };
-  
-  const startDrag = (e) => { 
-    active = true; 
-    move(e.clientX || (e.touches && e.touches[0].clientX)); 
-  };
-  const stopDrag = () => { active = false; };
-  
-  // Eventos de Rato (Mouse)
-  container.addEventListener('mousedown', startDrag);
-  window.addEventListener('mousemove', (e) => { if (active) move(e.clientX); });
-  window.addEventListener('mouseup', stopDrag);
-  
-  // Eventos de Toque (Mobile)
-  container.addEventListener('touchstart', startDrag, {passive: true});
-  window.addEventListener('touchmove', (e) => { if (active) move(e.touches[0].clientX); }, {passive: true});
-  window.addEventListener('touchend', stopDrag);
-}
+    const faqs = [
+      { q: 'Vocês usam IA mesmo? O resultado fica bom?', a: 'Sim, uso IA como ferramenta de criação — assim como um designer usa Photoshop. Cada entrega é revisada e ajustada para garantir qualidade e personalização pro seu negócio.' },
+      { q: 'O site funciona no celular?', a: 'Com certeza. Todos os sites são responsivos e otimizados para mobile, que é de onde vem a maioria dos acessos.' },
+      { q: 'Posso pedir ajustes?', a: 'Sim! No pacote Essencial: 1 revisão incluída. No Profissional: 1 revisão incluída. No Completo: até 5 revisões. Ajustes adicionais são combinados à parte com valores acessíveis.' },
+      { q: 'Qual é a política de reembolso?', a: 'Após a entrega do projeto, não é possível solicitar devolução ou reembolso. Por isso, é importante que você tenha conversado comigo antes e deixado claro todos os seus requisitos. Caso precise de ajustes após a entrega, eles serão cobrados à parte.' },
+      { q: 'Quanto tempo leva?', a: 'De 5 a 10 dias úteis dependendo do pacote. Prazos exatos são combinados antes de começar.' }
+    ];
 
-// === RENDERIZAR SERVIÇOS ===
-function buildServices() {
-  const grid = document.getElementById('servicesGrid');
-  if (!grid) return;
-  grid.innerHTML = '';
-  services.forEach(s => {
-    const div = document.createElement('div');
-    div.className = 'service-card p-6 rounded-2xl bg-[#111115] border border-gray-800/50';
-    div.innerHTML = `
-      <div class="w-12 h-12 rounded-xl bg-[#1a1a2e] flex items-center justify-center mb-5">
-        <i data-lucide="${s.icon}" style="width:24px;height:24px;" class="text-violet-500"></i>
-      </div>
-      <h3 class="text-white font-700 text-lg mb-2">${s.title}</h3>
-      <p class="text-gray-500 text-sm leading-relaxed">${s.desc}</p>
-    `;
-    grid.appendChild(div);
-  });
-}
-
-// === INICIALIZAÇÃO ===
-function initApp() {
-  // Inicializa todos os sliders na página
-  document.querySelectorAll('.ba-container').forEach(setupSlider);
-  buildServices();
-  
-  // Inicia os ícones Lucide
-  if (typeof lucide !== 'undefined') {
-    lucide.createIcons();
-  }
-}
-
-document.addEventListener('DOMContentLoaded', initApp);
-
-// === FORMULÁRIO DE CONTACTO ===
-const form = document.getElementById("formContato");
-const btn = document.getElementById("btnEnviar");
-const texto = document.getElementById("btnTexto");
-const loading = document.getElementById("loadingIcon");
-const sucesso = document.getElementById("msgSucesso");
-const erro = document.getElementById("msgErro");
-
-form.addEventListener("submit", async function(e) {
-  e.preventDefault(); // 🚨 impede redirecionamento
-
-  sucesso.classList.add("hidden");
-  erro.classList.add("hidden");
-
-  // loading state
-  texto.textContent = "Enviando...";
-  loading.classList.remove("hidden");
-  btn.disabled = true;
-
-  const data = new FormData(form);
-
-  try {
-    const response = await fetch("https://formsubmit.co/ajax/simonesanttos25@outlook.com", {
-      method: "POST",
-      body: data
-    });
-
-    const result = await response.json();
-
-    if (result.success === "true") {
-      sucesso.classList.remove("hidden");
-      form.reset();
-    } else {
-      throw new Error("Erro no envio");
+    function buildFAQ() {
+      const container = document.getElementById('faq-container');
+      faqs.forEach((faq, i) => {
+        const div = document.createElement('div');
+        div.className = 'rounded-lg overflow-hidden';
+        div.style.cssText = 'border: 1px solid rgba(0,212,255,0.1); background: rgba(0,212,255,0.02);';
+        div.innerHTML = `
+          <button onclick="toggleFaq(${i})" class="w-full flex items-center justify-between p-6 text-left text-sm font-semibold transition-colors" style="color: #ffffff;">
+            <span>${faq.q}</span>
+            <i data-lucide="chevron-down" style="width:18px;height:18px;color:rgba(0,212,255,0.6);transition:transform 0.3s;" id="faq-icon-${i}"></i>
+          </button>
+          <div id="faq-body-${i}" style="max-height:0;overflow:hidden;transition:max-height 0.3s ease;">
+            <p class="px-6 pb-6 text-sm" style="color: rgba(255,255,255,0.65); line-height: 1.7;">${faq.a}</p>
+          </div>
+        `;
+        container.appendChild(div);
+      });
+      lucide.createIcons();
     }
 
-  } catch (err) {
-    erro.classList.remove("hidden");
-  }
+    window.toggleFaq = function(i) {
+      const body = document.getElementById(`faq-body-${i}`);
+      const icon = document.getElementById(`faq-icon-${i}`);
+      const isOpen = body.style.maxHeight !== '0px' && body.style.maxHeight !== '';
+      body.style.maxHeight = isOpen ? '0px' : body.scrollHeight + 'px';
+      icon.style.transform = isOpen ? 'rotate(0deg)' : 'rotate(180deg)';
+    };
 
-  // reset botão
-  texto.textContent = "Enviar Mensagem";
-  loading.classList.add("hidden");
-  btn.disabled = false;
-});
+    window.openWhatsAppPackage = function(packageName, price) {
+      const message = `Olá! Tenho interesse no pacote ${packageName} (${price}). Gostaria de saber mais detalhes!`;
+      const whatsappNumber = defaultConfig.whatsapp_number || '5585988059532';
+      const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
+      window.open(whatsappUrl, '_blank');
+    };
+
+    function applyConfig(config) {
+      const c = { ...defaultConfig, ...config };
+      const headingFont = 'Plus Jakarta Sans, sans-serif';
+
+      const heroEl = document.getElementById('hero-title');
+      const words = (c.hero_title || defaultConfig.hero_title).split(' ');
+      const lastWord = words.pop();
+      heroEl.innerHTML = words.join(' ') + '<br><span class="gradient-neon">' + lastWord + '</span>';
+
+      document.getElementById('hero-subtitle').textContent = c.hero_subtitle || defaultConfig.hero_subtitle;
+      document.getElementById('nav-brand').textContent = c.brand_name || defaultConfig.brand_name;
+
+      const ctaText = c.cta_text || defaultConfig.cta_text;
+      document.getElementById('hero-cta').querySelector('span').textContent = ctaText;
+      document.getElementById('nav-cta').textContent = ctaText;
+
+      const emailLink = document.getElementById('email-contact');
+      if (emailLink) {
+        emailLink.href = `mailto:${c.email_address}`;
+      }
+    }
+
+    buildFAQ();
+    lucide.createIcons();
+
+    window.elementSdk.init({
+      defaultConfig,
+      onConfigChange: async (config) => { applyConfig(config); },
+      mapToCapabilities: (config) => ({
+        recolorables: [
+          { get: () => '#00d4ff', set: (v) => {} }
+        ],
+        borderables: [],
+        fontEditable: undefined,
+        fontSizeable: undefined
+      }),
+      mapToEditPanelValues: (config) => new Map([
+        ['hero_title', config.hero_title || defaultConfig.hero_title],
+        ['hero_subtitle', config.hero_subtitle || defaultConfig.hero_subtitle],
+        ['brand_name', config.brand_name || defaultConfig.brand_name],
+        ['whatsapp_number', config.whatsapp_number || defaultConfig.whatsapp_number],
+        ['email_address', config.email_address || defaultConfig.email_address],
+        ['cta_text', config.cta_text || defaultConfig.cta_text]
+      ])
+    });
+
+    applyConfig(defaultConfig);
   </script>
- </body>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9f0f9ebd048501c1',t:'MTc3Njk3NjE2My4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
