@@ -13,6 +13,23 @@
     * { margin: 0; padding: 0; box-sizing: border-box; }
     html, body { height: 100%; }
 
+.insta-btn {
+  background: linear-gradient(45deg, #833AB4, #FD1D1D, #F77737);
+  color: white;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+}
+
+.insta-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+}
+
+.insta-btn span {
+  font-size: 14px;
+}
+
     .portfolio-wrap {
       font-family: 'Outfit', sans-serif;
       height: 100%;
@@ -367,9 +384,19 @@
      <div class="text-gray-600 text-sm">
       © 2026 Estúdio de IA Criativo. Todos os direitos reservados.
      </div>
-     <div class="flex gap-5">
-      <a href="https://www.instagram.com/simoneamigo_/" class="text-gray-600 hover:text-violet-400 transition-colors"><i data-lucide="instagram" style="width:20px;height:20px;"></i></a> 
-      </div>
+     <div class="flex justify-center mt-10">
+
+  <a href="https://www.instagram.com/simoneamigo_/" 
+     target="_blank"
+     rel="noopener noreferrer"
+     class="insta-btn flex items-center gap-3 px-6 py-3 rounded-full">
+
+    <i data-lucide="instagram" style="width:22px;height:22px;"></i>
+    <span>Ver mais no Instagram</span>
+
+  </a>
+
+</div>
     </div>
    </footer>
   </div>
